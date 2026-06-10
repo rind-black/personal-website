@@ -144,15 +144,25 @@
     .project-preview {
       background: var(--bg3); border-left: 1px solid var(--border);
       display: flex; flex-direction: column;
-      position: relative; overflow: hidden; min-height: 300px;
+      overflow: hidden; min-height: 300px;
     }
     .project-inner.reverse .project-preview { border-left: none; border-right: 1px solid var(--border); }
 
+    /* Label is now a proper top bar, not floating */
     .preview-label {
-      position: absolute; top: 16px; left: 16px; z-index: 2;
-      background: rgba(14,14,22,0.75); backdrop-filter: blur(8px);
-      border: 1px solid var(--border2); border-radius: 6px;
-      padding: 4px 10px; font-size: 11px; font-weight: 600; color: var(--text2);
+      flex-shrink: 0;
+      display: flex; align-items: center; gap: 8px;
+      background: var(--bg2); border-bottom: 1px solid var(--border);
+      padding: 10px 18px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.2px; color: var(--muted);
+    }
+    .preview-label::before {
+      content: '';
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
     }
 
     .preview-img {
@@ -160,10 +170,10 @@
       object-position: top; flex: 1;
     }
 
-    /* SCREENSHOT MOCKUP (placeholder when no image) */
+    /* SCREENSHOT MOCKUP */
     .preview-mockup {
-      flex: 1; padding: 28px 24px;
-      font-family: 'Inter', monospace;
+      flex: 1; padding: 22px 22px;
+      font-family: 'Inter', sans-serif;
       overflow: hidden;
     }
 
@@ -326,24 +336,36 @@
           </div>
         </div>
         <div class="project-preview">
-          <span class="preview-label">API Reference · Tarantool</span>
-          <div class="preview-mockup api-mock">
-            <div class="fn">vshard.storage.on_bucket_event([<em>trigger-function</em>[, <em>old-trigger-function</em>]])</div>
-            <div class="desc">Since vshard v.0.1.22. Define a trigger for execution when the data from the user spaces is changed (deleted or inserted) due to the rebalancing process.</div>
-            <div class="section">Parameters:</div>
-            <div class="param"><span class="param-name">trigger-function</span><span class="param-type">function</span><span class="param-desc">— function which will become the trigger.</span></div>
-            <div class="param"><span class="param-name">old-trigger-function</span><span class="param-type">function</span><span class="param-desc">— existing trigger to be replaced.</span></div>
-            <div class="section">Returns:</div>
-            <div class="param"><span class="param-desc">nil or function pointer</span></div>
-            <div class="code-block">
-              <span class="fn-call">vshard.storage.on_bucket_event</span>(<span class="kw">function</span>(event, bucket_id, data)<br>
-              &nbsp;&nbsp;<span class="kw">if</span> event == <span class="str">'bucket_data_recv_txn'</span> <span class="kw">then</span><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">-- Handle it.</span><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">for</span> idx, space <span class="kw">in</span> <span class="fn-call">ipairs</span>(data.spaces) <span class="kw">do</span><br>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">end</span><br>
-              &nbsp;&nbsp;<span class="kw">end</span><br>
-              <span class="kw">end</span>)
+          <div class="preview-label">API Reference · Tarantool / VK</div>
+          <div class="preview-mockup" style="overflow-y:auto;">
+            <div style="font-size:11px; color:var(--muted); margin-bottom:14px; font-family:monospace;">vshard » storage » on_bucket_event</div>
+            <div style="font-family:monospace; font-size:13px; color:#e2b96f; font-weight:600; line-height:1.5; margin-bottom:10px;">vshard.storage.on_bucket_event(<br>&nbsp;&nbsp;[<span style="color:#7ec8e3;">trigger-function</span>[, <span style="color:#7ec8e3;">old-trigger-function</span>]]<br>)</div>
+            <div style="font-size:12px; color:var(--text2); line-height:1.7; margin-bottom:14px;">Since vshard v.0.1.22. Define a trigger for execution when data from user spaces is changed (deleted or inserted) due to rebalancing.</div>
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2); margin-bottom:8px;">Parameters</div>
+            <table style="width:100%; border-collapse:collapse; font-size:12px; margin-bottom:14px;">
+              <tr style="border-bottom:1px solid var(--border);">
+                <td style="padding:5px 8px 5px 0; color:#7ec8e3; font-family:monospace; white-space:nowrap;">trigger-function</td>
+                <td style="padding:5px 6px;"><span style="background:rgba(255,255,255,0.07); border-radius:3px; padding:1px 6px; font-family:monospace; color:var(--muted); font-size:11px;">function</span></td>
+                <td style="padding:5px 0 5px 6px; color:var(--text2);">Function to become the trigger.</td>
+              </tr>
+              <tr>
+                <td style="padding:5px 8px 5px 0; color:#7ec8e3; font-family:monospace; white-space:nowrap;">old-trigger-function</td>
+                <td style="padding:5px 6px;"><span style="background:rgba(255,255,255,0.07); border-radius:3px; padding:1px 6px; font-family:monospace; color:var(--muted); font-size:11px;">function</span></td>
+                <td style="padding:5px 0 5px 6px; color:var(--text2);">Existing trigger to replace.</td>
+              </tr>
+            </table>
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2); margin-bottom:8px;">Returns</div>
+            <div style="font-size:12px; color:var(--text2); margin-bottom:14px;"><span style="font-family:monospace; color:#7ec8e3;">nil</span> or a function pointer to the created trigger.</div>
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2); margin-bottom:8px;">Example</div>
+            <div style="background:rgba(0,0,0,0.35); border-radius:7px; padding:12px 14px; font-family:monospace; font-size:11px; line-height:1.75; border:1px solid var(--border);">
+              <span style="color:#c792ea;">vshard.storage</span>.<span style="color:#82aaff;">on_bucket_event</span>(<span style="color:#c792ea;">function</span>(event, bucket_id, data)<br>
+              &nbsp;&nbsp;<span style="color:#c792ea;">if</span> event == <span style="color:#c3e88d;">'bucket_data_recv_txn'</span> <span style="color:#c792ea;">then</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#546e7a;">-- process received data</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#c792ea;">for</span> _, space <span style="color:#c792ea;">in</span> <span style="color:#82aaff;">ipairs</span>(data.spaces) <span style="color:#c792ea;">do</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#82aaff;">process</span>(space)<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#c792ea;">end</span><br>
+              &nbsp;&nbsp;<span style="color:#c792ea;">end</span><br>
+              <span style="color:#c792ea;">end</span>)
             </div>
           </div>
         </div>
@@ -354,21 +376,51 @@
     <div class="project-card">
       <div class="project-inner reverse">
         <div class="project-preview">
-          <span class="preview-label">API Docs · FinTech</span>
-          <div class="preview-mockup api-mock">
-            <div class="fn">POST /api/v2/orders/create</div>
-            <div class="desc">Creates a new trading order. Requires KYC-verified account. Subject to CySEC regulatory limits.</div>
-            <div class="section">Request Parameters:</div>
-            <div class="param"><span class="param-name">symbol</span><span class="param-type">string</span><span class="param-desc">— Trading instrument (e.g. "EURUSD")</span></div>
-            <div class="param"><span class="param-name">volume</span><span class="param-type">number</span><span class="param-desc">— Order volume in lots</span></div>
-            <div class="param"><span class="param-name">type</span><span class="param-type">enum</span><span class="param-desc">— ORDER_TYPE_BUY | ORDER_TYPE_SELL</span></div>
-            <div class="param"><span class="param-name">stop_loss</span><span class="param-type">number?</span><span class="param-desc">— Optional stop-loss price</span></div>
-            <div class="section">Response:</div>
-            <div class="code-block">
+          <div class="preview-label">REST API Reference · RoboMarkets</div>
+          <div class="preview-mockup" style="overflow-y:auto;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+              <span style="background:#22543d; color:#6ee7b7; font-family:monospace; font-size:11px; font-weight:700; padding:3px 9px; border-radius:4px;">POST</span>
+              <span style="font-family:monospace; font-size:13px; color:var(--text);">/api/v2/orders/create</span>
+            </div>
+            <div style="font-size:12px; color:var(--text2); line-height:1.7; margin-bottom:14px;">Creates a new trading order. Requires KYC-verified account. Subject to CySEC regulatory limits on leverage and volume.</div>
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2); margin-bottom:8px;">Request Body</div>
+            <table style="width:100%; border-collapse:collapse; font-size:12px; margin-bottom:14px;">
+              <thead>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <th style="text-align:left; padding:4px 8px 6px 0; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2);">Parameter</th>
+                  <th style="text-align:left; padding:4px 6px 6px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2);">Type</th>
+                  <th style="text-align:left; padding:4px 0 6px 6px; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2);">Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:5px 8px 5px 0; color:#7ec8e3; font-family:monospace;">symbol</td>
+                  <td style="padding:5px 6px;"><span style="background:rgba(255,255,255,0.07); border-radius:3px; padding:1px 6px; font-family:monospace; color:var(--muted); font-size:11px;">string</span></td>
+                  <td style="padding:5px 0 5px 6px; color:var(--text2);">Trading instrument, e.g. <code style="font-size:11px; color:#c3e88d;">"EURUSD"</code></td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:5px 8px 5px 0; color:#7ec8e3; font-family:monospace;">volume</td>
+                  <td style="padding:5px 6px;"><span style="background:rgba(255,255,255,0.07); border-radius:3px; padding:1px 6px; font-family:monospace; color:var(--muted); font-size:11px;">number</span></td>
+                  <td style="padding:5px 0 5px 6px; color:var(--text2);">Order volume in lots</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--border);">
+                  <td style="padding:5px 8px 5px 0; color:#7ec8e3; font-family:monospace;">type</td>
+                  <td style="padding:5px 6px;"><span style="background:rgba(255,255,255,0.07); border-radius:3px; padding:1px 6px; font-family:monospace; color:var(--muted); font-size:11px;">enum</span></td>
+                  <td style="padding:5px 0 5px 6px; color:var(--text2);"><code style="font-size:11px; color:#c3e88d;">BUY</code> | <code style="font-size:11px; color:#c3e88d;">SELL</code></td>
+                </tr>
+                <tr>
+                  <td style="padding:5px 8px 5px 0; color:#7ec8e3; font-family:monospace;">stop_loss</td>
+                  <td style="padding:5px 6px;"><span style="background:rgba(255,255,255,0.07); border-radius:3px; padding:1px 6px; font-family:monospace; color:var(--muted); font-size:11px;">number?</span></td>
+                  <td style="padding:5px 0 5px 6px; color:var(--text2);">Optional stop-loss price level</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2); margin-bottom:8px;">Response <span style="color:#4ade80; background:rgba(22,163,74,0.12); padding:1px 7px; border-radius:3px; font-family:monospace;">200 OK</span></div>
+            <div style="background:rgba(0,0,0,0.35); border-radius:7px; padding:11px 14px; font-family:monospace; font-size:11px; line-height:1.75; border:1px solid var(--border);">
               {<br>
-              &nbsp;&nbsp;<span class="str">"order_id"</span>: <span class="fn-call">1045782</span>,<br>
-              &nbsp;&nbsp;<span class="str">"status"</span>: <span class="str">"PENDING"</span>,<br>
-              &nbsp;&nbsp;<span class="str">"created_at"</span>: <span class="str">"2024-03-15T09:41:00Z"</span><br>
+              &nbsp;&nbsp;<span style="color:#7ec8e3;">"order_id"</span>: <span style="color:#f78c6c;">1045782</span>,<br>
+              &nbsp;&nbsp;<span style="color:#7ec8e3;">"status"</span>: <span style="color:#c3e88d;">"PENDING"</span>,<br>
+              &nbsp;&nbsp;<span style="color:#7ec8e3;">"created_at"</span>: <span style="color:#c3e88d;">"2024-03-15T09:41:00Z"</span><br>
               }
             </div>
           </div>
@@ -431,18 +483,30 @@
           </div>
         </div>
         <div class="project-preview">
-          <span class="preview-label">Concepts Guide · Tarantool</span>
-          <div class="preview-mockup guide-mock">
-            <div class="g-breadcrumb">Platform › Concepts</div>
-            <div class="g-title">Storage Engines</div>
-            <div class="g-intro">A storage engine is a set of low-level routines that store and retrieve values. Tarantool offers a choice of two storage engines:</div>
-            <div style="padding-left:14px; margin-bottom:12px;">
-              <div style="font-size:12px; color:var(--text2); margin-bottom:4px;">· <span style="color:var(--accent);">memtx</span> — the in-memory storage engine used by default.</div>
-              <div style="font-size:12px; color:var(--text2);">· <span style="color:var(--accent);">vinyl</span> — the on-disk storage engine.</div>
+          <div class="preview-label">Concepts Guide · Tarantool / VK</div>
+          <div class="preview-mockup" style="overflow-y:auto; display:flex; gap:0;">
+            <!-- Sidebar -->
+            <div style="width:130px; flex-shrink:0; border-right:1px solid var(--border); padding-right:12px; margin-right:16px;">
+              <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2); margin-bottom:8px;">Concepts</div>
+              <div style="font-size:12px; color:var(--accent); font-weight:600; margin-bottom:5px; padding-left:6px; border-left:2px solid var(--accent);">Storage Engines</div>
+              <div style="font-size:12px; color:var(--muted); margin-bottom:5px; padding-left:8px;">Data Model</div>
+              <div style="font-size:12px; color:var(--muted); margin-bottom:5px; padding-left:8px;">Transactions</div>
+              <div style="font-size:12px; color:var(--muted); margin-bottom:5px; padding-left:8px;">Replication</div>
+              <div style="font-size:12px; color:var(--muted); margin-bottom:5px; padding-left:8px;">Sharding</div>
+              <div style="font-size:12px; color:var(--muted); margin-bottom:5px; padding-left:8px;">Triggers</div>
             </div>
-            <div class="g-title" style="font-size:16px; margin-top:16px;">Data Model</div>
-            <div class="g-intro">Tarantool is a NoSQL database. It stores data in <span style="color:var(--accent);">spaces</span>, which can be thought of as tables, and <span style="color:var(--accent);">tuples</span>, analogous to rows.</div>
-            <div class="g-note"><strong>Note:</strong> For details on persistence and recovery, see the Data Persistence section.</div>
+            <!-- Content -->
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:11px; color:var(--muted); margin-bottom:10px;">Platform › Concepts › Storage Engines</div>
+              <div style="font-family:'Sora',sans-serif; font-size:17px; font-weight:700; color:var(--text); margin-bottom:10px; letter-spacing:-0.3px;">Storage Engines</div>
+              <div style="font-size:12px; color:var(--text2); line-height:1.75; margin-bottom:12px;">A storage engine is a set of low-level routines that store and retrieve values. Tarantool offers two storage engines:</div>
+              <div style="background:rgba(0,0,0,0.2); border-radius:7px; padding:10px 12px; margin-bottom:12px; border:1px solid var(--border);">
+                <div style="font-size:12px; color:var(--text2); margin-bottom:6px;"><span style="color:#82aaff; font-family:monospace; font-weight:600;">memtx</span> — the <strong style="color:var(--text);">in-memory</strong> storage engine. All data is stored in RAM; snapshots are written to disk for persistence.</div>
+                <div style="font-size:12px; color:var(--text2);"><span style="color:#82aaff; font-family:monospace; font-weight:600;">vinyl</span> — the <strong style="color:var(--text);">on-disk</strong> storage engine. Suitable for datasets that exceed available RAM.</div>
+              </div>
+              <div style="font-family:'Sora',sans-serif; font-size:14px; font-weight:700; color:var(--text); margin-bottom:8px;">Data Model</div>
+              <div style="font-size:12px; color:var(--text2); line-height:1.75;">Tarantool stores data in <span style="color:#82aaff; font-family:monospace;">spaces</span> (analogous to tables) and <span style="color:#82aaff; font-family:monospace;">tuples</span> (analogous to rows). Each space has a primary index.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -452,26 +516,40 @@
     <div class="project-card">
       <div class="project-inner reverse">
         <div class="project-preview">
-          <span class="preview-label">User Guide · Route4Me</span>
-          <div class="preview-mockup guide-mock">
-            <div class="g-breadcrumb">Guide 4 Route Planners › Optimization Types</div>
-            <div class="g-title">Single & Multiple Driver Routes</div>
-            <div class="g-intro">Planning a route with multiple destinations is a complex optimization problem. Route4Me's route planning software finds the optimal sequence automatically.</div>
-            <div style="margin-top:14px;">
-              <div class="g-step">
-                <div class="g-step-num">1</div>
-                <div class="g-step-text"><strong>Upload addresses</strong> — import a list of stops via CSV, spreadsheet, or manual entry.</div>
-              </div>
-              <div class="g-step">
-                <div class="g-step-num">2</div>
-                <div class="g-step-text"><strong>Set Business Rules</strong> — configure time windows, vehicle capacity, and driver skills.</div>
-              </div>
-              <div class="g-step">
-                <div class="g-step-num">3</div>
-                <div class="g-step-text"><strong>Optimize</strong> — click Optimize to generate the most efficient route sequence.</div>
-              </div>
+          <div class="preview-label">User Guide · Route4Me</div>
+          <div class="preview-mockup" style="overflow-y:auto; display:flex; gap:0;">
+            <!-- Sidebar -->
+            <div style="width:120px; flex-shrink:0; border-right:1px solid var(--border); padding-right:10px; margin-right:14px;">
+              <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2); margin-bottom:8px;">Route Planning</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:8px;">Getting Started</div>
+              <div style="font-size:11px; color:var(--accent); font-weight:600; margin-bottom:4px; padding-left:6px; border-left:2px solid var(--accent);">Optimization Types</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:16px;">Single Driver</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:16px;">Multi-Driver</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:8px;">Business Rules</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:8px;">Fleet Management</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:8px;">Dispatching</div>
             </div>
-            <div class="g-note"><strong>Tip:</strong> Use Mixed Fleet mode to assign stops across vehicles of different capacities.</div>
+            <!-- Content -->
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:11px; color:var(--muted); margin-bottom:10px;">Route Planning › Optimization Types</div>
+              <div style="font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:var(--text); margin-bottom:10px; letter-spacing:-0.3px;">Multi-Driver Route Optimization</div>
+              <div style="font-size:12px; color:var(--text2); line-height:1.75; margin-bottom:12px;">Route4Me automatically finds the optimal stop sequence across multiple drivers, vehicles, and time windows.</div>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="display:flex; gap:9px; align-items:flex-start;">
+                  <div style="width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">1</div>
+                  <div style="font-size:12px; color:var(--text2); line-height:1.6;"><strong style="color:var(--text);">Upload addresses</strong> — import stops via CSV, spreadsheet, or manual entry.</div>
+                </div>
+                <div style="display:flex; gap:9px; align-items:flex-start;">
+                  <div style="width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">2</div>
+                  <div style="font-size:12px; color:var(--text2); line-height:1.6;"><strong style="color:var(--text);">Set business rules</strong> — configure time windows, vehicle capacity, and driver skills.</div>
+                </div>
+                <div style="display:flex; gap:9px; align-items:flex-start;">
+                  <div style="width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">3</div>
+                  <div style="font-size:12px; color:var(--text2); line-height:1.6;"><strong style="color:var(--text);">Click Optimize</strong> — the algorithm generates the most efficient sequence.</div>
+                </div>
+              </div>
+              <div style="background:rgba(79,142,247,0.07); border:1px solid rgba(79,142,247,0.2); border-radius:6px; padding:8px 10px; margin-top:12px; font-size:11px; color:var(--text2);">💡 <strong style="color:var(--accent);">Tip:</strong> Use Mixed Fleet mode to assign stops across vehicles of different capacities.</div>
+            </div>
           </div>
         </div>
         <div class="project-info">
@@ -522,26 +600,40 @@
           </div>
         </div>
         <div class="project-preview">
-          <span class="preview-label">Help Center · MyOffice Mailion</span>
-          <div class="preview-mockup guide-mock">
-            <div class="g-breadcrumb">Calendar › Working with Events › Accept Invitation</div>
-            <div class="g-title">Accept an Event Invitation</div>
-            <div class="g-intro">An invited participant can accept, tentatively accept, or decline a calendar event from the event viewer or directly from the invitation email.</div>
-            <div style="margin-top:14px;">
-              <div class="g-step">
-                <div class="g-step-num">1</div>
-                <div class="g-step-text">On the <strong>Calendar</strong> tab, double-click the event in the Time Grid or Event List. The event view opens.</div>
-              </div>
-              <div class="g-step">
-                <div class="g-step-num">2</div>
-                <div class="g-step-text">Click <strong>Accept</strong>, <strong>Tentative</strong>, or <strong>Decline</strong> in the event toolbar.</div>
-              </div>
-              <div class="g-step">
-                <div class="g-step-num">3</div>
-                <div class="g-step-text"><strong>Accept</strong>: the event appears in your calendar as <strong>Accepted</strong> and is highlighted.</div>
-              </div>
+          <div class="preview-label">Help Center · MyOffice Mailion</div>
+          <div class="preview-mockup" style="overflow-y:auto; display:flex; gap:0;">
+            <!-- Sidebar -->
+            <div style="width:120px; flex-shrink:0; border-right:1px solid var(--border); padding-right:10px; margin-right:14px;">
+              <div style="font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2); margin-bottom:8px;">Calendar</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:8px;">Overview</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:8px;">Create Event</div>
+              <div style="font-size:11px; color:var(--accent); font-weight:600; margin-bottom:4px; padding-left:6px; border-left:2px solid var(--accent);">Working with Events</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:16px;">Send Invitation</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:16px; color:var(--accent);">Accept Invitation</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:16px;">Edit Event</div>
+              <div style="font-size:11px; color:var(--muted); margin-bottom:4px; padding-left:8px;">Shared Calendars</div>
             </div>
-            <div class="g-note"><strong>Note:</strong> Declined events remain in the calendar in a dimmed state by default.</div>
+            <!-- Content -->
+            <div style="flex:1; min-width:0;">
+              <div style="font-size:11px; color:var(--muted); margin-bottom:10px;">Calendar › Working with Events</div>
+              <div style="font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:var(--text); margin-bottom:10px; letter-spacing:-0.3px;">Accept an Event Invitation</div>
+              <div style="font-size:12px; color:var(--text2); line-height:1.75; margin-bottom:12px;">An invited participant can accept, tentatively accept, or decline a calendar event from the event view or from the invitation email.</div>
+              <div style="display:flex; flex-direction:column; gap:8px;">
+                <div style="display:flex; gap:9px; align-items:flex-start;">
+                  <div style="width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">1</div>
+                  <div style="font-size:12px; color:var(--text2); line-height:1.6;">On the <strong style="color:var(--text);">Calendar</strong> tab, double-click the event in the Time Grid or Event List.</div>
+                </div>
+                <div style="display:flex; gap:9px; align-items:flex-start;">
+                  <div style="width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">2</div>
+                  <div style="font-size:12px; color:var(--text2); line-height:1.6;">Click <strong style="color:var(--text);">Accept</strong>, <strong style="color:var(--text);">Tentative</strong>, or <strong style="color:var(--text);">Decline</strong> in the event toolbar.</div>
+                </div>
+                <div style="display:flex; gap:9px; align-items:flex-start;">
+                  <div style="width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">3</div>
+                  <div style="font-size:12px; color:var(--text2); line-height:1.6;">The event is added to your calendar with the <strong style="color:#4ade80;">Accepted</strong> status and highlighted in your color.</div>
+                </div>
+              </div>
+              <div style="background:rgba(79,142,247,0.07); border:1px solid rgba(79,142,247,0.2); border-radius:6px; padding:8px 10px; margin-top:12px; font-size:11px; color:var(--text2);"><strong style="color:var(--accent);">Note:</strong> Declined events remain visible in the calendar in a dimmed state by default.</div>
+            </div>
           </div>
         </div>
       </div>
@@ -580,25 +672,36 @@
           </div>
         </div>
         <div class="project-preview">
-          <span class="preview-label">Installation Guide</span>
-          <div class="preview-mockup guide-mock">
-            <div class="g-title" style="font-size:15px; margin-bottom:10px;">Installation Guide: DNS Configuration</div>
-            <div class="g-intro">Before installing Mailion, configure the following DNS records for your domain. All records must propagate before proceeding.</div>
-            <div style="margin-top:12px; font-family: monospace; font-size:11px; background: rgba(0,0,0,0.3); border-radius:8px; padding: 12px;">
-              <div style="color:var(--muted); margin-bottom:6px;"># Required DNS records</div>
-              <div style="color:#c3e88d; margin-bottom:3px;">MX &nbsp; @ &nbsp; mail.yourdomain.com &nbsp; Priority 10</div>
-              <div style="color:#c3e88d; margin-bottom:3px;">TXT &nbsp; @ &nbsp; "v=spf1 include:_spf.yourdomain.com ~all"</div>
-              <div style="color:#c3e88d; margin-bottom:3px;">TXT &nbsp; _dmarc &nbsp; "v=DMARC1; p=quarantine"</div>
+          <div class="preview-label">Installation Guide · Mailion Enterprise</div>
+          <div class="preview-mockup" style="overflow-y:auto;">
+            <div style="font-size:11px; color:var(--muted); margin-bottom:12px;">Mailion Admin Guide › Installation › DNS Configuration</div>
+            <div style="font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:var(--text); margin-bottom:10px; letter-spacing:-0.3px;">Installation Guide: DNS Configuration</div>
+            <div style="font-size:12px; color:var(--text2); line-height:1.75; margin-bottom:14px;">Before installing Mailion, configure the following DNS records for your domain. All records must propagate before proceeding to the next step.</div>
+
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted2); margin-bottom:8px;">Required DNS Records</div>
+            <div style="background:rgba(0,0,0,0.35); border-radius:7px; padding:12px 14px; font-family:monospace; font-size:11px; line-height:2; border:1px solid var(--border); margin-bottom:14px;">
+              <div style="color:var(--muted2); margin-bottom:2px;"># Type &nbsp;&nbsp; Host &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Value</div>
+              <div><span style="color:#fbbf24;">MX</span> &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#7ec8e3;">@</span> &nbsp;&nbsp;&nbsp; <span style="color:#c3e88d;">mail.yourdomain.com</span> &nbsp; Priority 10</div>
+              <div><span style="color:#fbbf24;">TXT</span> &nbsp;&nbsp;&nbsp; <span style="color:#7ec8e3;">@</span> &nbsp;&nbsp;&nbsp; <span style="color:#c3e88d;">"v=spf1 include:_spf.yourdomain.com ~all"</span></div>
+              <div><span style="color:#fbbf24;">TXT</span> &nbsp;&nbsp;&nbsp; <span style="color:#7ec8e3;">_dmarc</span> &nbsp; <span style="color:#c3e88d;">"v=DMARC1; p=quarantine; rua=mailto:dmarc@yourdomain.com"</span></div>
+              <div><span style="color:#fbbf24;">CNAME</span> &nbsp; <span style="color:#7ec8e3;">mail</span> &nbsp;&nbsp; <span style="color:#c3e88d;">yourdomain.com</span></div>
             </div>
-            <div class="g-step" style="margin-top:12px;">
-              <div class="g-step-num">1</div>
-              <div class="g-step-text">Log into your DNS provider and navigate to <strong>DNS Management</strong>.</div>
+
+            <div style="display:flex; flex-direction:column; gap:8px; margin-bottom:12px;">
+              <div style="display:flex; gap:9px; align-items:flex-start;">
+                <div style="width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">1</div>
+                <div style="font-size:12px; color:var(--text2); line-height:1.6;">Log into your DNS provider and navigate to <strong style="color:var(--text);">DNS Management</strong>.</div>
+              </div>
+              <div style="display:flex; gap:9px; align-items:flex-start;">
+                <div style="width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">2</div>
+                <div style="font-size:12px; color:var(--text2); line-height:1.6;">Add each record from the table above. Leave TTL at the provider default unless instructed otherwise.</div>
+              </div>
+              <div style="display:flex; gap:9px; align-items:flex-start;">
+                <div style="width:20px; height:20px; border-radius:50%; background:var(--accent); color:#fff; font-size:10px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;">3</div>
+                <div style="font-size:12px; color:var(--text2); line-height:1.6;">Verify propagation: <code style="font-family:monospace; font-size:11px; color:#c3e88d;">nslookup -type=MX yourdomain.com</code></div>
+              </div>
             </div>
-            <div class="g-step">
-              <div class="g-step-num">2</div>
-              <div class="g-step-text">Add the MX record pointing to your mail server hostname.</div>
-            </div>
-            <div class="g-note"><strong>Note:</strong> DNS propagation can take up to 48 hours. Verify with <code style="font-size:11px;">nslookup</code>.</div>
+            <div style="background:rgba(251,191,36,0.07); border:1px solid rgba(251,191,36,0.25); border-radius:6px; padding:8px 10px; font-size:11px; color:var(--text2);"><strong style="color:#fbbf24;">⚠ Note:</strong> DNS propagation can take up to 48 hours. Do not proceed with Mailion installation until all records resolve correctly.</div>
           </div>
         </div>
       </div>
@@ -616,30 +719,44 @@
     <div class="project-card">
       <div class="project-inner reverse">
         <div class="project-preview">
-          <span class="preview-label">Changelog · Tarantool</span>
-          <div class="preview-mockup changelog-mock">
-            <div class="version">
-              <span class="v-tag">v3.1.0</span><span class="v-date">March 2024</span>
-              <div style="margin-top:8px;">
-                <span class="change-type type-added">Added</span>
-                <div class="change-item">New <code style="font-size:11px; color:var(--accent);">vshard.storage.on_bucket_event()</code> trigger API</div>
-                <div class="change-item">Support for <code style="font-size:11px; color:var(--accent);">bucket_data_recv_txn</code> event type</div>
+          <div class="preview-label">Changelog · Tarantool / VK</div>
+          <div class="preview-mockup" style="overflow-y:auto;">
+            <div style="font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:var(--text); margin-bottom:4px; letter-spacing:-0.3px;">Tarantool Changelog</div>
+            <div style="font-size:11px; color:var(--muted); margin-bottom:18px;">vshard module · maintained by Technical Writing team</div>
+
+            <!-- v3.1.0 -->
+            <div style="margin-bottom:18px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <span style="background:rgba(79,142,247,0.12); border:1px solid rgba(79,142,247,0.3); color:var(--accent); font-family:monospace; font-size:12px; font-weight:700; padding:3px 10px; border-radius:5px;">v3.1.0</span>
+                <span style="font-size:11px; color:var(--muted);">March 15, 2024</span>
               </div>
-              <div style="margin-top:8px;">
-                <span class="change-type type-fixed">Fixed</span>
-                <div class="change-item">Rebalancer no longer skips buckets with pending transactions</div>
-                <div class="change-item">Memory leak in storage fiber on hot reload</div>
+              <div style="margin-bottom:8px;">
+                <div style="display:inline-block; background:rgba(22,163,74,0.12); color:#4ade80; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:6px;">Added</div>
+                <div style="font-size:12px; color:var(--text2); padding-left:12px; margin-bottom:4px; line-height:1.6;">New <code style="font-family:monospace; font-size:11px; color:#82aaff;">vshard.storage.on_bucket_event()</code> trigger API for rebalancing hooks</div>
+                <div style="font-size:12px; color:var(--text2); padding-left:12px; line-height:1.6;">Support for <code style="font-family:monospace; font-size:11px; color:#82aaff;">bucket_data_recv_txn</code> event type</div>
+              </div>
+              <div>
+                <div style="display:inline-block; background:rgba(234,179,8,0.10); color:#fbbf24; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:6px;">Fixed</div>
+                <div style="font-size:12px; color:var(--text2); padding-left:12px; margin-bottom:4px; line-height:1.6;">Rebalancer no longer skips buckets with pending transactions</div>
+                <div style="font-size:12px; color:var(--text2); padding-left:12px; line-height:1.6;">Memory leak in storage fiber on hot reload</div>
               </div>
             </div>
-            <div class="version">
-              <span class="v-tag">v3.0.2</span><span class="v-date">January 2024</span>
-              <div style="margin-top:8px;">
-                <span class="change-type type-changed">Changed</span>
-                <div class="change-item">Default rebalancing threshold reduced from 1% to 0.1%</div>
+
+            <div style="border-top:1px solid var(--border); margin-bottom:16px;"></div>
+
+            <!-- v3.0.2 -->
+            <div>
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
+                <span style="background:rgba(79,142,247,0.07); border:1px solid var(--border2); color:var(--text2); font-family:monospace; font-size:12px; font-weight:700; padding:3px 10px; border-radius:5px;">v3.0.2</span>
+                <span style="font-size:11px; color:var(--muted);">January 8, 2024</span>
               </div>
-              <div style="margin-top:8px;">
-                <span class="change-type type-fixed">Fixed</span>
-                <div class="change-item">Race condition in router failover on shard topology change</div>
+              <div style="margin-bottom:8px;">
+                <div style="display:inline-block; background:rgba(139,92,246,0.12); color:#a78bfa; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:6px;">Changed</div>
+                <div style="font-size:12px; color:var(--text2); padding-left:12px; line-height:1.6;">Default rebalancing threshold reduced from 1% to 0.1% for better balance accuracy</div>
+              </div>
+              <div>
+                <div style="display:inline-block; background:rgba(234,179,8,0.10); color:#fbbf24; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:6px;">Fixed</div>
+                <div style="font-size:12px; color:var(--text2); padding-left:12px; line-height:1.6;">Race condition in router failover on shard topology change</div>
               </div>
             </div>
           </div>
