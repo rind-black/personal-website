@@ -215,10 +215,11 @@
     .doc-frame-content {
       flex: 1;
       overflow-y: auto;
-      padding: 20px;
-      background: var(--bg2);
+      padding: 0;
+      background: #ffffff;
       font-family: 'Inter', sans-serif;
       font-size: 12px;
+      min-height: 320px;
     }
 
     /* Legacy - kept for changelog/install mockups */
@@ -398,7 +399,37 @@
               <div class="doc-frame-url">tarantool.io/en/doc/latest/reference/reference_rock/vshard/</div>
               <div class="doc-frame-label">API Reference</div>
             </div>
-            <img src="img/tarantool-api.png" alt="Tarantool vshard API Reference" class="doc-frame-img" />
+            <div class="doc-frame-content">
+              <div style="font-family:monospace; font-size:13px; font-weight:700; color:#1a1a1a; margin-bottom:10px; line-height:1.5;">vshard.storage.on_bucket_event([<em>trigger-function</em>[, <em>old-trigger-function</em>]])</div>
+              <p style="font-size:13px; color:#333; line-height:1.7; margin-bottom:14px;">Since vshard v.0.1.22. Define a trigger for execution when the data from the user spaces is changed (deleted or inserted) due to the rebalancing process. The trigger is invoked each time the data batch changes.</p>
+              <p style="font-size:13px; font-weight:700; color:#1a1a1a; margin-bottom:8px;">Parameters:</p>
+              <ul style="list-style:disc; padding-left:20px; margin-bottom:14px; display:flex; flex-direction:column; gap:6px;">
+                <li style="font-size:13px; color:#333; line-height:1.6;"><strong>trigger-function</strong> (<code style="background:#f0f0f0; border-radius:4px; padding:1px 6px; font-size:12px;">function</code>) – function which will become the trigger function.</li>
+                <li style="font-size:13px; color:#333; line-height:1.6;"><strong>old-trigger-function</strong> (<code style="background:#f0f0f0; border-radius:4px; padding:1px 6px; font-size:12px;">function</code>) – existing trigger function which will be replaced by trigger-function.</li>
+              </ul>
+              <p style="font-size:13px; font-weight:700; color:#1a1a1a; margin-bottom:6px;">Return:</p>
+              <p style="font-size:13px; color:#333; margin-bottom:14px; padding-left:4px;">nil or function pointer</p>
+              <p style="font-size:13px; color:#333; line-height:1.7; margin-bottom:14px;">The <code style="background:#f0f0f0; border-radius:4px; padding:1px 6px; font-size:12px;">trigger-function</code> can have up to three parameters:</p>
+              <ul style="list-style:disc; padding-left:20px; margin-bottom:16px; display:flex; flex-direction:column; gap:6px;">
+                <li style="font-size:13px; color:#333; line-height:1.6;"><code style="background:#f0f0f0; border-radius:4px; padding:1px 6px; font-size:12px;">event_type</code> (string) – to distinguish event, compare with <code style="background:#f0f0f0; border-radius:4px; padding:1px 6px; font-size:12px;">bucket_data_recv_txn</code> and <code style="background:#f0f0f0; border-radius:4px; padding:1px 6px; font-size:12px;">bucket_data_gc_txn</code>.</li>
+                <li style="font-size:13px; color:#333; line-height:1.6;"><code style="background:#f0f0f0; border-radius:4px; padding:1px 6px; font-size:12px;">bucket_id</code> (unsigned) – bucket id.</li>
+                <li style="font-size:13px; color:#333; line-height:1.6;"><code style="background:#f0f0f0; border-radius:4px; padding:1px 6px; font-size:12px;">data</code> (table) – additional information about data change transaction. Includes an array of all spaces (<code style="background:#f0f0f0; border-radius:4px; padding:1px 6px; font-size:12px;">data.spaces</code>), affected by the transaction.</li>
+              </ul>
+              <p style="font-size:13px; font-weight:700; color:#1a1a1a; margin-bottom:8px;">Example:</p>
+              <div style="background:#1e1e2e; border-radius:8px; padding:14px 16px; font-family:monospace; font-size:12px; line-height:1.8; overflow-x:auto;">
+                <span style="color:#cba6f7;">vshard.storage.on_bucket_event</span>(<span style="color:#cba6f7;">function</span>(event, bucket_id, data)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#cba6f7;">if</span> event == <span style="color:#a6e3a1;">'bucket_data_recv_txn'</span> <span style="color:#cba6f7;">then</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#6c7086;">-- Handle it.</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#cba6f7;">for</span> idx, space <span style="color:#cba6f7;">in</span> <span style="color:#89b4fa;">ipairs</span>(data.spaces) <span style="color:#cba6f7;">do</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#cba6f7;">end</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#cba6f7;">elseif</span> event == <span style="color:#a6e3a1;">'bucket_data_gc_txn'</span> <span style="color:#cba6f7;">then</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#6c7086;">-- Handle it.</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#cba6f7;">end</span><br>
+                <span style="color:#cba6f7;">end</span>)
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -481,7 +512,40 @@
               <div class="doc-frame-url">tarantool.io/en/doc/latest/concepts/</div>
               <div class="doc-frame-label">Concepts Guide</div>
             </div>
-            <img src="img/tarantool-concepts.png" alt="Tarantool Concepts Documentation" class="doc-frame-img" />
+            <div class="doc-frame-content" style="display:flex; gap:0; padding:0;">
+              <div style="width:180px; flex-shrink:0; border-right:1px solid #e5e7eb; padding:20px 14px; background:#f9f9fb;">
+                <div style="font-size:11px; font-weight:700; color:#888; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Platform</div>
+                <div style="font-size:12px; color:#555; margin-bottom:5px; padding-left:8px;">Overview</div>
+                <div style="font-size:12px; color:#555; margin-bottom:5px; padding-left:8px;">Getting started</div>
+                <div style="font-size:12px; font-weight:700; color:#2563eb; margin-bottom:3px; padding-left:8px;">Concepts</div>
+                <div style="font-size:12px; color:#2563eb; font-weight:600; margin-bottom:3px; padding-left:20px; border-left:2px solid #2563eb; margin-left:8px;">Storage engines</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Data model</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Fibers</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Transactions</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Replication</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Sharding</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Triggers</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Configuration</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Storage</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Transactions</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Replication</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Security</div>
+              </div>
+              <div style="flex:1; padding:24px 28px; overflow-y:auto; background:#fff;">
+                <div style="font-size:11px; color:#888; margin-bottom:16px;">Platform › Concepts</div>
+                <h1 style="font-size:28px; font-weight:700; color:#1a1a1a; margin-bottom:20px; letter-spacing:-0.5px;">Concepts</h1>
+                <h2 style="font-size:20px; font-weight:700; color:#1a1a1a; margin-bottom:10px;">Storage engines</h2>
+                <p style="font-size:13px; color:#444; line-height:1.75; margin-bottom:10px;">A storage engine is a set of low-level routines that store and retrieve values. Tarantool offers a choice of two storage engines:</p>
+                <ul style="list-style:disc; padding-left:20px; margin-bottom:14px;">
+                  <li style="font-size:13px; color:#444; line-height:1.7; margin-bottom:4px;"><a style="color:#2563eb; text-decoration:none;">memtx</a> is the in-memory storage engine used by default.</li>
+                  <li style="font-size:13px; color:#444; line-height:1.7;"><a style="color:#2563eb; text-decoration:none;">vinyl</a> is the on-disk storage engine.</li>
+                </ul>
+                <p style="font-size:13px; color:#444; line-height:1.75; margin-bottom:16px;">For details, check the <a style="color:#2563eb; text-decoration:none;">Storage engines</a> section.</p>
+                <h2 style="font-size:20px; font-weight:700; color:#1a1a1a; margin-bottom:10px;">Data model</h2>
+                <p style="font-size:13px; color:#444; line-height:1.75; margin-bottom:10px;">Tarantool is a NoSQL database. It stores data in <a style="color:#2563eb; text-decoration:none;">spaces</a>, which can be thought of as tables in a relational database, and <a style="color:#2563eb; text-decoration:none;">tuples</a>, which are analogous to rows.</p>
+                <p style="font-size:13px; color:#444; line-height:1.75;">The platform allows <a style="color:#2563eb; text-decoration:none;">describing the data schema</a> but does not require it.</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -497,7 +561,34 @@
               <div class="doc-frame-url">support.route4me.com/guide-4-route-planners/</div>
               <div class="doc-frame-label">User Guide</div>
             </div>
-            <img src="img/route4me-guide.png" alt="Route4Me User Guide" class="doc-frame-img" />
+            <div class="doc-frame-content" style="display:flex; gap:0; padding:0;">
+              <div style="width:190px; flex-shrink:0; border-right:1px solid #e5e7eb; padding:20px 14px; background:#f9f9fb;">
+                <div style="font-size:11px; font-weight:700; color:#888; text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Getting Started</div>
+                <div style="font-size:12px; color:#555; margin-bottom:5px; padding-left:8px;">Guide 4 Route Planners</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Route Planning & Optimization</div>
+                <div style="font-size:12px; font-weight:700; color:#1a1a1a; margin-bottom:3px; padding-left:8px;">Optimization Types &amp; Settings</div>
+                <div style="font-size:12px; font-weight:700; color:#e85d2a; margin-bottom:3px; padding-left:20px; border-left:2px solid #e85d2a; margin-left:8px;">Single &amp; Multiple Driver Routes</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Single &amp; Multiple Depot Routing</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Mixed Vehicles Fleet</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Driver Skills &amp; Mixed Fleet</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Business Rules &amp; Constraints</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Order Route Planning</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Guide 4 Dispatchers</div>
+              </div>
+              <div style="flex:1; padding:24px 28px; overflow-y:auto; background:#fff;">
+                <h1 style="font-size:22px; font-weight:700; color:#1a1a1a; margin-bottom:14px; line-height:1.3;">Single Driver And Multiple Drivers Route Planning Guide</h1>
+                <p style="font-size:13px; color:#444; line-height:1.75; margin-bottom:14px;">Planning a <a style="color:#e85d2a; text-decoration:none;">route with multiple destinations</a>, even for one driver, is a complicated computational problem with many factors to consider. Optimizing routes for multiple drivers from a single set of addresses is exponentially more difficult.</p>
+                <p style="font-size:13px; color:#444; line-height:1.75; margin-bottom:16px;">With <a style="color:#e85d2a; text-decoration:none;">route planning and optimization software</a>, finding the optimal sequence of destinations with the most efficient directions is easy and can save time, minimize fuel expenses, and help you stay on schedule.</p>
+                <div style="background:#f4f8ff; border-radius:8px; padding:16px 18px; margin-bottom:16px;">
+                  <p style="font-size:13px; font-weight:700; color:#1a1a1a; margin-bottom:10px;">Plan Routes For Multiple Drivers</p>
+                  <ul style="list-style:disc; padding-left:18px; display:flex; flex-direction:column; gap:6px;">
+                    <li style="font-size:13px; color:#444; line-height:1.6;">Upload addresses &amp; plan routes for one or more drivers</li>
+                    <li style="font-size:13px; color:#444; line-height:1.6;">Use business rules &amp; constraints to easily plan multi-driver routes according to your business use case</li>
+                    <li style="font-size:13px; color:#444; line-height:1.6;">Automatically assign drivers to routes</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
         <div class="project-info">
@@ -554,7 +645,48 @@
               <div class="doc-frame-url">help.myoffice.ru/mailion/calendar/working-with-events/</div>
               <div class="doc-frame-label">Help Center</div>
             </div>
-            <img src="img/mailion-calendar.png" alt="MyOffice Mailion Help Center" class="doc-frame-img" />
+            <div class="doc-frame-content" style="display:flex; gap:0; padding:0;">
+              <div style="width:180px; flex-shrink:0; border-right:1px solid #e5e7eb; padding:20px 14px; background:#f9f9fb;">
+                <div style="font-size:12px; color:#555; margin-bottom:5px; padding-left:8px;">About app</div>
+                <div style="font-size:12px; color:#555; margin-bottom:5px; padding-left:8px;">Getting started</div>
+                <div style="font-size:12px; color:#555; margin-bottom:5px; padding-left:8px;">Interface</div>
+                <div style="font-size:12px; color:#555; margin-bottom:5px; padding-left:8px;">Mail</div>
+                <div style="font-size:12px; font-weight:700; color:#1a1a1a; margin-bottom:3px; padding-left:8px;">Calendar</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Calendar tab</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:20px;">Working with calendars</div>
+                <div style="font-size:12px; font-weight:600; color:#1a1a1a; margin-bottom:3px; padding-left:20px;">Working with events</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:32px;">View event</div>
+                <div style="font-size:12px; font-weight:600; color:#2563eb; margin-bottom:3px; padding-left:32px; border-left:2px solid #2563eb; margin-left:0;">Accept invitation</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:32px;">Add event reminder</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:32px;">Create event</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:32px;">Customize event</div>
+                <div style="font-size:12px; color:#555; margin-bottom:5px; padding-left:20px;">Tasks</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Address book</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Accounts</div>
+                <div style="font-size:12px; color:#555; margin-bottom:3px; padding-left:8px;">Settings</div>
+              </div>
+              <div style="flex:1; padding:24px 28px; overflow-y:auto; background:#fff;">
+                <p style="font-size:12px; color:#888; margin-bottom:14px;">An invited event participant can view the event and perform the following actions:</p>
+                <ul style="list-style:disc; padding-left:18px; margin-bottom:16px; display:flex; flex-direction:column; gap:6px;">
+                  <li style="font-size:13px; color:#444; line-height:1.6;">accept the invitation or decline the invitation;</li>
+                  <li style="font-size:13px; color:#444; line-height:1.6;">move the event from one calendar to another;</li>
+                  <li style="font-size:13px; color:#444; line-height:1.6;">set a <a style="color:#2563eb; text-decoration:none;">reminder</a> for the event;</li>
+                  <li style="font-size:13px; color:#444; line-height:1.6;">suggest a different time to the organizer (if the account is connected to the Mailion server).</li>
+                </ul>
+                <p style="font-size:13px; font-weight:700; color:#1a1a1a; margin-bottom:10px;">Accept an event invitation from the event viewer window</p>
+                <p style="font-size:13px; color:#444; line-height:1.6; margin-bottom:12px;">To accept or decline an event invitation:</p>
+                <ol style="padding-left:18px; display:flex; flex-direction:column; gap:8px;">
+                  <li style="font-size:13px; color:#444; line-height:1.7;">On the <a style="color:#2563eb; text-decoration:none;">Calendar tab</a>, double-click the desired event in the Time-Grid, Event pane, or Event List. The <a style="color:#2563eb; text-decoration:none;">event view</a> window opens.</li>
+                  <li style="font-size:13px; color:#444; line-height:1.7;">If you need to send a reply now, click the desired reply button:<br>
+                    <ul style="list-style:disc; padding-left:18px; margin-top:8px; display:flex; flex-direction:column; gap:5px;">
+                      <li style="font-size:13px; color:#444; line-height:1.6;"><strong>Accept</strong>: if you have accepted the invitation, the event will automatically appear in your calendar as <strong>Accepted</strong>. It will be highlighted in a bright color in the interface.</li>
+                      <li style="font-size:13px; color:#444; line-height:1.6;"><strong>Tentative</strong>: an event that is tentatively accepted is marked as <strong>Accepted tentatively</strong>.</li>
+                      <li style="font-size:13px; color:#444; line-height:1.6;"><strong>Decline</strong>: by default, declined events are not removed from the calendar, but are marked as <strong>Declined</strong>.</li>
+                    </ul>
+                  </li>
+                </ol>
+              </div>
+            </div>
           </div>
         </div>
       </div>
