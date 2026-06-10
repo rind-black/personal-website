@@ -161,55 +161,8 @@
     }
 
     /* Browser chrome bar */
-    .doc-frame-bar {
-      background: #1e1e2a;
-      border-bottom: 1px solid var(--border);
-      padding: 9px 14px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-    .doc-frame-dots {
-      display: flex; gap: 5px; flex-shrink: 0;
-    }
-    .doc-frame-dots span {
-      width: 10px; height: 10px; border-radius: 50%;
-    }
-    .doc-frame-dots span:nth-child(1) { background: #ff5f57; }
-    .doc-frame-dots span:nth-child(2) { background: #febc2e; }
-    .doc-frame-dots span:nth-child(3) { background: #28c840; }
-    .doc-frame-url {
-      flex: 1;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 4px 10px;
-      font-size: 11px;
-      color: var(--muted);
-      font-family: monospace;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .doc-frame-label {
-      font-size: 10px;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: var(--muted2);
-      flex-shrink: 0;
-    }
 
     /* Screenshot inside frame */
-    .doc-frame-img {
-      width: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: top left;
-      flex: 1;
-      min-height: 300px;
-    }
 
     /* Code mockup inside frame */
     .doc-frame-content {
@@ -393,11 +346,6 @@
           </div>
         </div>
         <div class="project-preview">
-          <div class="doc-frame">
-            <div class="doc-frame-bar">
-              <div class="doc-frame-dots"><span></span><span></span><span></span></div>
-              <div class="doc-frame-url">tarantool.io/en/doc/latest/reference/reference_rock/vshard/</div>
-              <div class="doc-frame-label">API Reference</div>
             </div>
             <div class="doc-frame-content">
               <div style="font-family:monospace; font-size:13px; font-weight:700; color:#1a1a1a; margin-bottom:10px; line-height:1.5;">vshard.storage.on_bucket_event([<em>trigger-function</em>[, <em>old-trigger-function</em>]])</div>
@@ -429,8 +377,6 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;<span style="color:#cba6f7;">end</span><br>
                 <span style="color:#cba6f7;">end</span>)
               </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -470,8 +416,6 @@
             <span class="result-pill">EN / RU / DE</span>
           </div>
         </div>
-      </div>
-    </div>
   </div>
 
   <!-- ── 2. DEVELOPER & USER GUIDES ── -->
@@ -506,11 +450,6 @@
           </div>
         </div>
         <div class="project-preview">
-          <div class="doc-frame">
-            <div class="doc-frame-bar">
-              <div class="doc-frame-dots"><span></span><span></span><span></span></div>
-              <div class="doc-frame-url">tarantool.io/en/doc/latest/concepts/</div>
-              <div class="doc-frame-label">Concepts Guide</div>
             </div>
             <div class="doc-frame-content" style="display:flex; gap:0; padding:0;">
               <div style="width:180px; flex-shrink:0; border-right:1px solid #e5e7eb; padding:20px 14px; background:#f9f9fb;">
@@ -545,8 +484,6 @@
                 <p style="font-size:13px; color:#444; line-height:1.75; margin-bottom:10px;">Tarantool is a NoSQL database. It stores data in <a style="color:#2563eb; text-decoration:none;">spaces</a>, which can be thought of as tables in a relational database, and <a style="color:#2563eb; text-decoration:none;">tuples</a>, which are analogous to rows.</p>
                 <p style="font-size:13px; color:#444; line-height:1.75;">The platform allows <a style="color:#2563eb; text-decoration:none;">describing the data schema</a> but does not require it.</p>
               </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -555,11 +492,6 @@
     <div class="project-card">
       <div class="project-inner reverse">
         <div class="project-preview">
-          <div class="doc-frame">
-            <div class="doc-frame-bar">
-              <div class="doc-frame-dots"><span></span><span></span><span></span></div>
-              <div class="doc-frame-url">support.route4me.com/guide-4-route-planners/</div>
-              <div class="doc-frame-label">User Guide</div>
             </div>
             <div class="doc-frame-content" style="display:flex; gap:0; padding:0;">
               <div style="width:190px; flex-shrink:0; border-right:1px solid #e5e7eb; padding:20px 14px; background:#f9f9fb;">
@@ -587,9 +519,7 @@
                     <li style="font-size:13px; color:#444; line-height:1.6;">Automatically assign drivers to routes</li>
                   </ul>
                 </div>
-              </div>
-            </div>
-          </div>
+        </div>
         </div>
         <div class="project-info">
           <p class="project-badge">Product User Guide</p>
@@ -612,8 +542,6 @@
             <span class="result-pill">Logistics</span>
           </div>
         </div>
-      </div>
-    </div>
 
     <!-- MyOffice -->
     <div class="project-card">
@@ -639,11 +567,6 @@
           </div>
         </div>
         <div class="project-preview">
-          <div class="doc-frame">
-            <div class="doc-frame-bar">
-              <div class="doc-frame-dots"><span></span><span></span><span></span></div>
-              <div class="doc-frame-url">help.myoffice.ru/mailion/calendar/working-with-events/</div>
-              <div class="doc-frame-label">Help Center</div>
             </div>
             <div class="doc-frame-content" style="display:flex; gap:0; padding:0;">
               <div style="width:180px; flex-shrink:0; border-right:1px solid #e5e7eb; padding:20px 14px; background:#f9f9fb;">
@@ -686,8 +609,6 @@
                   </li>
                 </ol>
               </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>
@@ -755,9 +676,7 @@
               </div>
             </div>
             <div style="background:rgba(251,191,36,0.07); border:1px solid rgba(251,191,36,0.25); border-radius:6px; padding:8px 10px; font-size:11px; color:var(--text2);"><strong style="color:#fbbf24;">⚠ Note:</strong> DNS propagation can take up to 48 hours. Do not proceed with Mailion installation until all records resolve correctly.</div>
-          </div>
         </div>
-      </div>
     </div>
   </div>
 
@@ -810,9 +729,7 @@
               <div>
                 <div style="display:inline-block; background:rgba(234,179,8,0.10); color:#fbbf24; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:6px;">Fixed</div>
                 <div style="font-size:12px; color:var(--text2); padding-left:12px; line-height:1.6;">Race condition in router failover on shard topology change</div>
-              </div>
-            </div>
-          </div>
+        </div>
         </div>
         <div class="project-info">
           <p class="project-badge">Release Documentation</p>
@@ -834,8 +751,6 @@
             <span class="result-pill">Multi-audience</span>
           </div>
         </div>
-      </div>
-    </div>
   </div>
 
   <!-- ── 5. COMPLIANCE ── -->
@@ -861,9 +776,7 @@
         <div class="mini-icon">🗂️</div>
         <div class="mini-title">Maritime Systems</div>
         <div class="mini-desc">Structured and digitized 1,000+ archival and regulatory documents for distributed maritime systems at SeaProject. Automated annual reporting from 2 weeks to 1 day.</div>
-      </div>
-    </div>
-  </div>
+        </div>
 
 </div>
 
