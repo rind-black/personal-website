@@ -112,8 +112,8 @@
 
     .project-card.featured { border-color: var(--border2); }
 
-    .project-inner { display: grid; grid-template-columns: 1fr 420px; gap: 0; }
-    .project-inner.reverse { grid-template-columns: 420px 1fr; }
+    .project-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .project-inner.reverse { grid-template-columns: 1fr 1fr; }
 
     .project-info { padding: 44px 48px; }
 
@@ -144,8 +144,8 @@
     .project-preview {
       background: var(--bg3); border-left: 1px solid var(--border);
       display: flex; flex-direction: column;
-      overflow: hidden; min-height: 300px;
-      padding: 20px;
+      overflow: hidden; min-height: 420px;
+      padding: 16px;
     }
     .project-inner.reverse .project-preview { border-left: none; border-right: 1px solid var(--border); }
 
@@ -219,7 +219,7 @@
       background: #ffffff;
       font-family: 'Inter', sans-serif;
       font-size: 12px;
-      min-height: 320px;
+      min-height: 380px;
     }
 
     /* Legacy - kept for changelog/install mockups */
