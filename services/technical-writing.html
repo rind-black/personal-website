@@ -282,17 +282,18 @@
 
 <!-- CATEGORY NAV -->
 <div class="cat-nav">
-  <a href="#api" class="cat-btn active">API Documentation</a>
-  <a href="#guides" class="cat-btn">Developer & User Guides</a>
-  <a href="#install" class="cat-btn">Installation Guides</a>
-  <a href="#release" class="cat-btn">Release Notes & Changelogs</a>
-  <a href="#compliance" class="cat-btn">Compliance & Regulatory</a>
+  <button class="cat-btn active" data-filter="all">All</button>
+  <button class="cat-btn" data-filter="api">API Documentation</button>
+  <button class="cat-btn" data-filter="guides">Developer & User Guides</button>
+  <button class="cat-btn" data-filter="install">Installation Guides</button>
+  <button class="cat-btn" data-filter="release">Release Notes & Changelogs</button>
+  <button class="cat-btn" data-filter="compliance">Compliance & Regulatory</button>
 </div>
 
 <div class="content">
 
   <!-- ── 1. API DOCUMENTATION ── -->
-  <div class="cat-section" id="api">
+  <div class="cat-section" id="api" data-cat="api">
     <div class="cat-header">
       <span class="cat-icon">⚡</span>
       <span class="cat-title">API Documentation</span>
@@ -399,7 +400,7 @@
   </div>
 
   <!-- ── 2. DEVELOPER & USER GUIDES ── -->
-  <div class="cat-section" id="guides">
+  <div class="cat-section" id="guides" data-cat="guides">
     <div class="cat-header">
       <span class="cat-icon">📖</span>
       <span class="cat-title">Developer & User Guides</span>
@@ -548,7 +549,7 @@
   </div>
 
   <!-- ── 3. INSTALLATION GUIDES ── -->
-  <div class="cat-section" id="install">
+  <div class="cat-section" id="install" data-cat="install">
     <div class="cat-header">
       <span class="cat-icon">⚙️</span>
       <span class="cat-title">Installation & Setup Guides</span>
@@ -605,7 +606,7 @@
   </div>
 
   <!-- ── 4. RELEASE NOTES ── -->
-  <div class="cat-section" id="release">
+  <div class="cat-section" id="release" data-cat="release">
     <div class="cat-header">
       <span class="cat-icon">📋</span>
       <span class="cat-title">Release Notes & Changelogs</span>
@@ -668,7 +669,7 @@
   </div>
 
   <!-- ── 5. COMPLIANCE ── -->
-  <div class="cat-section" id="compliance">
+  <div class="cat-section" id="compliance" data-cat="compliance">
     <div class="cat-header">
       <span class="cat-icon">🔒</span>
       <span class="cat-title">Compliance & Regulatory Documentation</span>
@@ -706,12 +707,39 @@
 <footer>© 2026 Maria Strabykina. All rights reserved.</footer>
 
 <script>
-  // Category nav highlight on scroll
   const btns = document.querySelectorAll('.cat-btn');
+  const sections = document.querySelectorAll('.cat-section');
+
   btns.forEach(btn => {
     btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+
+      // Update active button
       btns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
+
+      sections.forEach(sec => {
+        if (filter === 'all' || sec.dataset.cat === filter) {
+          // Show
+          sec.style.display = '';
+          // Trigger fade-in
+          sec.style.opacity = '0';
+          sec.style.transform = 'translateY(12px)';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              sec.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+              sec.style.opacity = '1';
+              sec.style.transform = 'translateY(0)';
+            });
+          });
+        } else {
+          // Hide
+          sec.style.transition = 'none';
+          sec.style.display = 'none';
+          sec.style.opacity = '';
+          sec.style.transform = '';
+        }
+      });
     });
   });
 </script>
