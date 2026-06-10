@@ -59,10 +59,10 @@
     .page-title em { font-style: normal; color: var(--accent); }
     .page-desc { font-size: 17px; color: var(--text2); max-width: 620px; line-height: 1.65; margin-bottom: 28px; }
 
-    .meta-row { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; }
-    .meta-item { }
-    .meta-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted2); margin-bottom: 4px; }
-    .meta-value { font-size: 14px; font-weight: 600; color: var(--text2); }
+    .meta-row { display: grid; grid-template-columns: auto 1fr; gap: 16px 40px; align-items: start; margin-bottom: 32px; }
+    .meta-item { display: contents; }
+    .meta-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted2); padding-top: 2px; white-space: nowrap; }
+    .meta-value { font-size: 13px; font-weight: 500; color: var(--text2); line-height: 1.6; }
 
     .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
     .tag {
@@ -275,15 +275,15 @@
     </div>
     <div class="meta-item">
       <div class="meta-label">Industries</div>
-      <div class="meta-value">FinTech · EdTech · SaaS · DevTools</div>
+      <div class="meta-value">FinTech · RegTech · EdTech · SaaS · DevTools · Open Source · Enterprise Software · Logistics · Maritime · E-commerce · AI / ML · Entertainment</div>
     </div>
     <div class="meta-item">
       <div class="meta-label">Languages</div>
-      <div class="meta-value">English · Russian · German</div>
+      <div class="meta-value">English · Russian · German · Spanish</div>
     </div>
     <div class="meta-item">
       <div class="meta-label">Tools</div>
-      <div class="meta-value">Confluence · Notion · Swagger · Markdown · Figma</div>
+      <div class="meta-value">Confluence · Notion · Swagger · OpenAPI · Postman · Markdown · Git · DITA · MadCap Flare · ReadMe · Gitbook · Figma · Jira · Miro</div>
     </div>
   </div>
 
