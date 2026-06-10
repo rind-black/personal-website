@@ -15,6 +15,7 @@
 }
 
 html { scroll-behavior: smooth; }
+a { color: inherit; }
 
 body {
   font-family: 'Inter', sans-serif;
