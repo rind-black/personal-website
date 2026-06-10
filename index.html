@@ -17,9 +17,9 @@
       --border:  #22222f;
       --border2: #2e2e3e;
       --text:    #f0f0f5;
-      --text2:   #9498b0;
-      --muted:   #606478;
-      --muted2:  #363848;
+      --text2:   #b0b3c8;
+      --muted:   #7c8099;
+      --muted2:  #565870;
       --accent:  #4f8ef7;
       --accent2: #2563eb;
     }
@@ -89,7 +89,7 @@
 
     /* ── HERO ── */
     .hero {
-      padding: 130px 48px 80px;
+      padding: 120px 48px 60px;
       max-width: 1160px;
       margin: 0 auto;
       position: relative;
@@ -105,23 +105,23 @@
     }
 
     .hero-label {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 2.5px;
-      color: var(--accent);
-      margin-bottom: 28px;
+      color: var(--text2);
+      margin-bottom: 16px;
     }
 
     .hero h1 {
       font-family: 'Sora', sans-serif;
-      font-size: clamp(48px, 6.5vw, 82px);
+      font-size: clamp(36px, 5vw, 62px);
       font-weight: 800;
-      line-height: 1.0;
-      letter-spacing: -3px;
+      line-height: 1.05;
+      letter-spacing: -2px;
       color: var(--text);
-      max-width: 900px;
-      margin-bottom: 32px;
+      max-width: 700px;
+      margin-bottom: 20px;
     }
 
     .hero h1 em {
@@ -130,11 +130,11 @@
     }
 
     .hero-sub {
-      font-size: 19px;
+      font-size: 16px;
       color: var(--text2);
-      max-width: 520px;
-      line-height: 1.65;
-      margin-bottom: 36px;
+      max-width: 480px;
+      line-height: 1.6;
+      margin-bottom: 32px;
       font-weight: 400;
     }
 
@@ -599,32 +599,12 @@
 
 <!-- HERO -->
 <div class="hero">
-  <h1><span style="font-size:0.45em;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--text2);display:block;margin-bottom:16px;">Technical Content & Web Specialist</span><em>Explains, ranks,</em><br>and converts.</h1>
-
+  <p class="hero-label">Technical Content & Web Specialist</p>
+  <h1>Content that<br><em>explains, ranks,</em><br>and converts.</h1>
   <p class="hero-sub">I help AI and SaaS companies explain complex products, grow organic traffic, and ship polished web experiences.</p>
-
   <div class="hero-actions">
     <a href="#contact" class="btn-primary">Work With Me →</a>
     <a href="#work" class="btn-outline">See My Work</a>
-  </div>
-
-  <div class="hero-stats">
-    <div class="stat-item">
-      <div class="stat-number">+40%</div>
-      <div class="stat-label">Organic traffic<br>in 60 days</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">10+</div>
-      <div class="stat-label">Years across SaaS,<br>FinTech & EdTech</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">100+</div>
-      <div class="stat-label">SEO articles<br>shipped</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">−35%</div>
-      <div class="stat-label">Content turnaround<br>with AI workflows</div>
-    </div>
   </div>
 </div>
 
