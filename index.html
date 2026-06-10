@@ -225,7 +225,7 @@
     .logos-label {
       font-size: 11px;
       font-weight: 700;
-      color: var(--muted2);
+      color: var(--muted);
       text-transform: uppercase;
       letter-spacing: 2px;
       white-space: nowrap;
@@ -234,20 +234,23 @@
 
     .logos-row {
       display: flex;
-      gap: 48px;
+      gap: 0;
       align-items: center;
       flex-wrap: wrap;
+      flex: 1;
+      justify-content: space-between;
     }
 
     .logo-pill {
       font-size: 14px;
       font-weight: 600;
-      color: var(--muted2);
+      color: var(--text2);
       letter-spacing: -0.3px;
       transition: color 0.2s;
+      text-align: center;
     }
 
-    .logo-pill:hover { color: var(--muted); }
+    .logo-pill:hover { color: var(--text); }
 
     /* ── SECTION COMMONS ── */
     section { padding: 112px 48px; }
