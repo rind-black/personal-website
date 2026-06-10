@@ -3,122 +3,718 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Technical Writing & Documentation — Maria Strabykina</title>
+  <title>Technical Writing Portfolio — Maria Strabykina</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="_layout.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { color: inherit; }
+
+    :root {
+      --bg:      #0e0e16;
+      --bg2:     #13131d;
+      --bg3:     #1a1a26;
+      --border:  #22222f;
+      --border2: #2e2e3e;
+      --text:    #f0f0f5;
+      --text2:   #b0b3c8;
+      --muted:   #7c8099;
+      --muted2:  #565870;
+      --accent:  #4f8ef7;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(14,14,22,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px; height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 16px; color: var(--text); text-decoration: none; }
+    .nav-back { font-size: 14px; color: var(--muted); text-decoration: none; display: flex; align-items: center; gap: 6px; transition: color 0.2s; }
+    .nav-back:hover { color: var(--text); }
+    .nav-cta { background: var(--accent); color: #fff; padding: 9px 22px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 120px 48px 64px;
+      max-width: 1160px; margin: 0 auto;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--text2); }
+
+    .page-title {
+      font-family: 'Sora', sans-serif;
+      font-size: clamp(32px, 4.5vw, 56px);
+      font-weight: 800; letter-spacing: -2px; line-height: 1.05;
+      color: var(--text); margin-bottom: 16px;
+    }
+    .page-title em { font-style: normal; color: var(--accent); }
+    .page-desc { font-size: 17px; color: var(--text2); max-width: 620px; line-height: 1.65; margin-bottom: 28px; }
+
+    .meta-row { display: flex; gap: 32px; flex-wrap: wrap; margin-bottom: 32px; }
+    .meta-item { }
+    .meta-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted2); margin-bottom: 4px; }
+    .meta-value { font-size: 14px; font-weight: 600; color: var(--text2); }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag {
+      background: var(--bg3); border: 1px solid var(--border2);
+      color: var(--text2); font-size: 12px; font-weight: 600;
+      padding: 5px 12px; border-radius: 6px;
+    }
+
+    /* CATEGORY NAV */
+    .cat-nav {
+      max-width: 1160px; margin: 0 auto;
+      padding: 32px 48px 0;
+      display: flex; gap: 8px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-btn {
+      padding: 8px 18px; border-radius: 8px;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+      border: 1px solid var(--border2); color: var(--muted);
+      cursor: pointer;
+    }
+    .cat-btn:hover, .cat-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    /* CONTENT */
+    .content { max-width: 1160px; margin: 0 auto; padding: 64px 48px; }
+
+    /* CATEGORY SECTION */
+    .cat-section { margin-bottom: 80px; }
+
+    .cat-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 40px; padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-icon { font-size: 24px; }
+    .cat-title { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; }
+    .cat-count { font-size: 13px; color: var(--muted); background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 12px; font-weight: 600; }
+
+    /* PROJECT CARD */
+    .project-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 16px; overflow: hidden; margin-bottom: 20px;
+      transition: border-color 0.2s;
+    }
+    .project-card:hover { border-color: var(--border2); }
+
+    .project-card.featured { border-color: var(--border2); }
+
+    .project-inner { display: grid; grid-template-columns: 1fr 420px; gap: 0; }
+    .project-inner.reverse { grid-template-columns: 420px 1fr; }
+
+    .project-info { padding: 44px 48px; }
+
+    .project-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1.5px; color: var(--accent);
+      margin-bottom: 16px;
+    }
+    .project-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+
+    .project-client { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted2); margin-bottom: 10px; }
+
+    .project-title { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; margin-bottom: 14px; line-height: 1.25; }
+
+    .project-desc { font-size: 14px; color: var(--text2); line-height: 1.75; margin-bottom: 24px; }
+
+    .project-deliverables { margin-bottom: 24px; }
+    .deliverables-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted2); margin-bottom: 10px; }
+    .deliverables-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .deliverables-list li { font-size: 13px; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; }
+    .deliverables-list li::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+
+    .result-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .result-pill { background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--text2); }
+
+    /* PREVIEW PANEL */
+    .project-preview {
+      background: var(--bg3); border-left: 1px solid var(--border);
+      display: flex; flex-direction: column;
+      position: relative; overflow: hidden; min-height: 300px;
+    }
+    .project-inner.reverse .project-preview { border-left: none; border-right: 1px solid var(--border); }
+
+    .preview-label {
+      position: absolute; top: 16px; left: 16px; z-index: 2;
+      background: rgba(14,14,22,0.75); backdrop-filter: blur(8px);
+      border: 1px solid var(--border2); border-radius: 6px;
+      padding: 4px 10px; font-size: 11px; font-weight: 600; color: var(--text2);
+    }
+
+    .preview-img {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: top; flex: 1;
+    }
+
+    /* SCREENSHOT MOCKUP (placeholder when no image) */
+    .preview-mockup {
+      flex: 1; padding: 28px 24px;
+      font-family: 'Inter', monospace;
+      overflow: hidden;
+    }
+
+    /* API DOC MOCKUP */
+    .api-mock { font-size: 12px; line-height: 1.7; }
+    .api-mock .fn { color: #e2b96f; font-weight: 600; font-size: 13px; margin-bottom: 12px; font-family: monospace; }
+    .api-mock .desc { color: var(--text2); font-size: 12px; margin-bottom: 12px; }
+    .api-mock .section { color: var(--text); font-weight: 700; font-size: 12px; margin: 12px 0 6px; }
+    .api-mock .param { display: flex; gap: 8px; margin-bottom: 4px; padding-left: 12px; }
+    .api-mock .param-name { color: #7ec8e3; font-family: monospace; font-size: 11px; }
+    .api-mock .param-type { background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 3px; font-family: monospace; font-size: 11px; color: var(--muted); }
+    .api-mock .param-desc { color: var(--text2); font-size: 11px; }
+    .api-mock .code-block { background: rgba(0,0,0,0.3); border-radius: 8px; padding: 12px 14px; margin-top: 12px; font-family: monospace; font-size: 11px; }
+    .api-mock .code-block .kw { color: #c792ea; }
+    .api-mock .code-block .fn-call { color: #82aaff; }
+    .api-mock .code-block .str { color: #c3e88d; }
+    .api-mock .code-block .cm { color: #546e7a; }
+
+    /* GUIDE MOCKUP */
+    .guide-mock { }
+    .guide-mock .g-breadcrumb { font-size: 11px; color: var(--muted); margin-bottom: 16px; }
+    .guide-mock .g-title { font-size: 18px; font-weight: 700; color: var(--text); margin-bottom: 12px; }
+    .guide-mock .g-intro { font-size: 12px; color: var(--text2); margin-bottom: 16px; line-height: 1.6; }
+    .guide-mock .g-step { display: flex; gap: 10px; margin-bottom: 10px; align-items: flex-start; }
+    .guide-mock .g-step-num { width: 20px; height: 20px; border-radius: 50%; background: var(--accent); color: #fff; font-size: 11px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+    .guide-mock .g-step-text { font-size: 12px; color: var(--text2); line-height: 1.5; }
+    .guide-mock .g-step-text strong { color: var(--text); }
+    .guide-mock .g-note { background: rgba(79,142,247,0.08); border: 1px solid rgba(79,142,247,0.2); border-radius: 6px; padding: 8px 12px; font-size: 11px; color: var(--text2); margin-top: 12px; }
+    .guide-mock .g-note strong { color: var(--accent); }
+
+    /* CHANGELOG MOCKUP */
+    .changelog-mock { }
+    .changelog-mock .version { margin-bottom: 16px; }
+    .changelog-mock .v-tag { display: inline-block; background: rgba(79,142,247,0.12); border: 1px solid rgba(79,142,247,0.25); color: var(--accent); font-size: 12px; font-weight: 700; padding: 3px 10px; border-radius: 6px; font-family: monospace; margin-bottom: 8px; }
+    .changelog-mock .v-date { font-size: 11px; color: var(--muted); margin-left: 8px; }
+    .changelog-mock .change-type { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; padding: 2px 8px; border-radius: 4px; margin-bottom: 6px; display: inline-block; }
+    .changelog-mock .type-added { background: rgba(22,163,74,0.15); color: #4ade80; }
+    .changelog-mock .type-fixed { background: rgba(234,179,8,0.12); color: #fbbf24; }
+    .changelog-mock .type-changed { background: rgba(139,92,246,0.15); color: #a78bfa; }
+    .changelog-mock .change-item { font-size: 12px; color: var(--text2); padding-left: 14px; margin-bottom: 4px; position: relative; line-height: 1.5; }
+    .changelog-mock .change-item::before { content: '·'; position: absolute; left: 4px; color: var(--muted); }
+
+    /* SMALL CARDS GRID */
+    .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 24px; }
+    .mini-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 28px 24px; transition: border-color 0.2s; }
+    .mini-card:hover { border-color: var(--border2); }
+    .mini-icon { font-size: 20px; margin-bottom: 12px; }
+    .mini-title { font-family: 'Sora', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+    .mini-desc { font-size: 13px; color: var(--text2); line-height: 1.6; }
+
+    /* CTA */
+    .page-cta { background: var(--bg3); border-top: 1px solid var(--border); padding: 72px 48px; text-align: center; }
+    .page-cta h2 { font-family: 'Sora', sans-serif; font-size: clamp(24px, 3.5vw, 40px); font-weight: 800; letter-spacing: -1.5px; color: var(--text); margin-bottom: 12px; }
+    .page-cta p { font-size: 16px; color: var(--text2); margin-bottom: 36px; }
+    .btn-primary { background: var(--accent); color: #fff; padding: 14px 30px; border-radius: 10px; font-size: 15px; font-weight: 700; text-decoration: none; display: inline-block; transition: opacity 0.2s, transform 0.15s; }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    footer { border-top: 1px solid var(--border); padding: 24px 48px; text-align: center; font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      nav, .page-header, .cat-nav, .content, .page-cta { padding-left: 24px; padding-right: 24px; }
+      .project-inner, .project-inner.reverse { grid-template-columns: 1fr; }
+      .project-preview { min-height: 200px; border-left: none !important; border-right: none !important; border-top: 1px solid var(--border); }
+      .cards-grid { grid-template-columns: 1fr; }
+      footer { padding: 24px; }
+    }
+  </style>
 </head>
 <body>
 
 <nav>
   <a href="../index.html" class="nav-logo">Maria Strabykina</a>
-  <a href="../index.html" class="nav-back">← Back to main</a>
+  <a href="../index.html" class="nav-back">← Back</a>
   <a href="mailto:mastrabykina@gmail.com" class="nav-cta">Work With Me</a>
 </nav>
 
+<!-- HEADER -->
 <div class="page-header">
   <div class="breadcrumb">
     <a href="../index.html">Home</a> <span>/</span> <span>Technical Writing</span>
   </div>
   <h1 class="page-title">Technical Writing<br><em>& Documentation</em></h1>
-  <p class="page-desc">API references, knowledge bases, help centers, and onboarding guides. Written so developers actually read them and users stop calling support.</p>
-  <div class="page-tags">
+  <p class="page-desc">10+ years writing documentation that developers ship with and users actually understand — API references, developer guides, help centers, installation manuals, and release notes.</p>
+
+  <div class="meta-row">
+    <div class="meta-item">
+      <div class="meta-label">Experience</div>
+      <div class="meta-value">10+ years</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Industries</div>
+      <div class="meta-value">FinTech · EdTech · SaaS · DevTools</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Languages</div>
+      <div class="meta-value">English · Russian · German</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Tools</div>
+      <div class="meta-value">Confluence · Notion · Swagger · Markdown · Figma</div>
+    </div>
+  </div>
+
+  <div class="tag-row">
     <span class="tag">API Documentation</span>
-    <span class="tag">REST / SOAP</span>
-    <span class="tag">Swagger / Postman</span>
-    <span class="tag">Knowledge Base</span>
+    <span class="tag">Developer Guides</span>
     <span class="tag">Help Centers</span>
-    <span class="tag">Markdown / Confluence</span>
-    <span class="tag">KYC / Compliance Docs</span>
+    <span class="tag">Installation Guides</span>
+    <span class="tag">Release Notes</span>
+    <span class="tag">UX Writing</span>
+    <span class="tag">Swagger / Postman</span>
+    <span class="tag">REST · SOAP · GraphQL</span>
+    <span class="tag">KYC / Compliance</span>
   </div>
 </div>
 
-<div class="cases-section">
-  <p class="cases-label">Selected Cases</p>
+<!-- CATEGORY NAV -->
+<div class="cat-nav">
+  <a href="#api" class="cat-btn active">API Documentation</a>
+  <a href="#guides" class="cat-btn">Developer & User Guides</a>
+  <a href="#install" class="cat-btn">Installation Guides</a>
+  <a href="#release" class="cat-btn">Release Notes & Changelogs</a>
+  <a href="#compliance" class="cat-btn">Compliance & Regulatory</a>
+</div>
 
-  <div class="case-card">
-    <div class="case-meta">
-      <div class="case-metric">EU</div>
-      <div class="case-metric-label">multi-market coverage</div>
-      <p class="case-client">RoboMarkets</p>
-      <p class="case-year">2022 – 2024 · Cyprus</p>
+<div class="content">
+
+  <!-- ── 1. API DOCUMENTATION ── -->
+  <div class="cat-section" id="api">
+    <div class="cat-header">
+      <span class="cat-icon">⚡</span>
+      <span class="cat-title">API Documentation</span>
+      <span class="cat-count">2 projects</span>
     </div>
-    <div class="case-content">
-      <h2 class="case-title">Head of Technical Documentation — FinTech API Docs</h2>
-      <p class="case-desc">Led full-cycle development of technical documentation for trading platforms and REST/SOAP APIs across EU-regulated markets. Owned KYC/AML compliance flows, Swagger API specs, and knowledge base architecture. Coordinated with legal and compliance stakeholders across CySEC regulatory frameworks. Supervised translation and localization for multilingual content across EU markets (EN/RU/DE).</p>
-      <div class="case-results">
-        <span class="result-pill">REST & SOAP APIs</span>
-        <span class="result-pill">KYC/AML flows</span>
-        <span class="result-pill">EU multi-market</span>
-        <span class="result-pill">EN/RU/DE</span>
+
+    <!-- Tarantool / VK -->
+    <div class="project-card featured">
+      <div class="project-inner">
+        <div class="project-info">
+          <p class="project-badge">Developer Docs</p>
+          <p class="project-client">VK / Tarantool · 2022</p>
+          <h2 class="project-title">API Reference for Tarantool — Open-Source In-Memory Database</h2>
+          <p class="project-desc">Led full documentation strategy for Tarantool, an open-source in-memory database and application server used by 100K+ developers. Built the complete API reference from scratch: function signatures, parameter tables, return types, usage examples, and edge cases. Managed a team of 5 technical writers and set English-language standards across the docs.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>Full API reference with 200+ method entries (vshard, storage, router modules)</li>
+              <li>Structured parameter tables with types, optionality, and descriptions</li>
+              <li>Runnable code examples in Lua for every method</li>
+              <li>Architecture and concepts documentation for new developers</li>
+              <li>Release notes and changelog for v1.x–v3.x</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">100K+ developers</span>
+            <span class="result-pill">Team of 5 writers</span>
+            <span class="result-pill">EN standard set</span>
+            <span class="result-pill">Open-source</span>
+          </div>
+        </div>
+        <div class="project-preview">
+          <span class="preview-label">API Reference · Tarantool</span>
+          <div class="preview-mockup api-mock">
+            <div class="fn">vshard.storage.on_bucket_event([<em>trigger-function</em>[, <em>old-trigger-function</em>]])</div>
+            <div class="desc">Since vshard v.0.1.22. Define a trigger for execution when the data from the user spaces is changed (deleted or inserted) due to the rebalancing process.</div>
+            <div class="section">Parameters:</div>
+            <div class="param"><span class="param-name">trigger-function</span><span class="param-type">function</span><span class="param-desc">— function which will become the trigger.</span></div>
+            <div class="param"><span class="param-name">old-trigger-function</span><span class="param-type">function</span><span class="param-desc">— existing trigger to be replaced.</span></div>
+            <div class="section">Returns:</div>
+            <div class="param"><span class="param-desc">nil or function pointer</span></div>
+            <div class="code-block">
+              <span class="fn-call">vshard.storage.on_bucket_event</span>(<span class="kw">function</span>(event, bucket_id, data)<br>
+              &nbsp;&nbsp;<span class="kw">if</span> event == <span class="str">'bucket_data_recv_txn'</span> <span class="kw">then</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="cm">-- Handle it.</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">for</span> idx, space <span class="kw">in</span> <span class="fn-call">ipairs</span>(data.spaces) <span class="kw">do</span><br>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
+              &nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">end</span><br>
+              &nbsp;&nbsp;<span class="kw">end</span><br>
+              <span class="kw">end</span>)
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RoboMarkets -->
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-preview">
+          <span class="preview-label">API Docs · FinTech</span>
+          <div class="preview-mockup api-mock">
+            <div class="fn">POST /api/v2/orders/create</div>
+            <div class="desc">Creates a new trading order. Requires KYC-verified account. Subject to CySEC regulatory limits.</div>
+            <div class="section">Request Parameters:</div>
+            <div class="param"><span class="param-name">symbol</span><span class="param-type">string</span><span class="param-desc">— Trading instrument (e.g. "EURUSD")</span></div>
+            <div class="param"><span class="param-name">volume</span><span class="param-type">number</span><span class="param-desc">— Order volume in lots</span></div>
+            <div class="param"><span class="param-name">type</span><span class="param-type">enum</span><span class="param-desc">— ORDER_TYPE_BUY | ORDER_TYPE_SELL</span></div>
+            <div class="param"><span class="param-name">stop_loss</span><span class="param-type">number?</span><span class="param-desc">— Optional stop-loss price</span></div>
+            <div class="section">Response:</div>
+            <div class="code-block">
+              {<br>
+              &nbsp;&nbsp;<span class="str">"order_id"</span>: <span class="fn-call">1045782</span>,<br>
+              &nbsp;&nbsp;<span class="str">"status"</span>: <span class="str">"PENDING"</span>,<br>
+              &nbsp;&nbsp;<span class="str">"created_at"</span>: <span class="str">"2024-03-15T09:41:00Z"</span><br>
+              }
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-badge">REST API Docs</p>
+          <p class="project-client">RoboMarkets · 2022–2024 · Cyprus / EU</p>
+          <h2 class="project-title">REST & SOAP API Documentation for EU-Regulated Trading Platform</h2>
+          <p class="project-desc">Owned full-cycle technical documentation for trading platforms and REST/SOAP APIs across EU-regulated markets. Documented KYC/AML onboarding flows, risk-scoring modules, and identity verification processes. Coordinated with legal and compliance stakeholders across CySEC regulatory frameworks. All docs localized in EN, RU, and DE.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>REST and SOAP API reference with endpoints, parameters, error codes</li>
+              <li>KYC/AML compliance flow documentation for EU onboarding</li>
+              <li>Swagger specs and Postman collections for developer onboarding</li>
+              <li>Back-office tool documentation for operations teams</li>
+              <li>Multilingual documentation (EN / RU / DE)</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">REST & SOAP</span>
+            <span class="result-pill">KYC/AML flows</span>
+            <span class="result-pill">CySEC compliance</span>
+            <span class="result-pill">EN / RU / DE</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="case-card">
-    <div class="case-meta">
-      <div class="case-metric">100K+</div>
-      <div class="case-metric-label">developer users</div>
-      <p class="case-client">VK / Tarantool</p>
-      <p class="case-year">2022 · Russia</p>
+  <!-- ── 2. DEVELOPER & USER GUIDES ── -->
+  <div class="cat-section" id="guides">
+    <div class="cat-header">
+      <span class="cat-icon">📖</span>
+      <span class="cat-title">Developer & User Guides</span>
+      <span class="cat-count">3 projects</span>
     </div>
-    <div class="case-content">
-      <h2 class="case-title">Lead Technical Writer — Open-Source Database Documentation</h2>
-      <p class="case-desc">Led documentation strategy for Tarantool, an in-memory database and application server used by 100K+ developers. Created in-depth user guides, API references, architecture documentation, tutorials, and release notes. Built and managed a team of 5 technical writers, establishing English-language standards and quality controls.</p>
-      <div class="case-results">
-        <span class="result-pill">Team of 5 writers</span>
-        <span class="result-pill">API references</span>
-        <span class="result-pill">Architecture docs</span>
-        <span class="result-pill">Open-source</span>
+
+    <!-- Tarantool Concepts -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-info">
+          <p class="project-badge">Developer Guide</p>
+          <p class="project-client">VK / Tarantool · 2022</p>
+          <h2 class="project-title">Concepts & Architecture Guide — Tarantool Platform</h2>
+          <p class="project-desc">Wrote the Concepts section of Tarantool's documentation — the entry point for all new developers. Explained storage engines (memtx, vinyl), data models, transactions, replication, sharding, and triggers in plain English. Combined architecture-level accuracy with accessible language for developers coming from SQL backgrounds.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>Storage engines overview (memtx vs vinyl — when and why)</li>
+              <li>Data model explanation: spaces, tuples, indexes</li>
+              <li>Transactions, replication, and sharding guides</li>
+              <li>Cross-linked navigation with sidebar and breadcrumbs</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">Architecture docs</span>
+            <span class="result-pill">Developer onboarding</span>
+            <span class="result-pill">NoSQL concepts</span>
+          </div>
+        </div>
+        <div class="project-preview">
+          <span class="preview-label">Concepts Guide · Tarantool</span>
+          <div class="preview-mockup guide-mock">
+            <div class="g-breadcrumb">Platform › Concepts</div>
+            <div class="g-title">Storage Engines</div>
+            <div class="g-intro">A storage engine is a set of low-level routines that store and retrieve values. Tarantool offers a choice of two storage engines:</div>
+            <div style="padding-left:14px; margin-bottom:12px;">
+              <div style="font-size:12px; color:var(--text2); margin-bottom:4px;">· <span style="color:var(--accent);">memtx</span> — the in-memory storage engine used by default.</div>
+              <div style="font-size:12px; color:var(--text2);">· <span style="color:var(--accent);">vinyl</span> — the on-disk storage engine.</div>
+            </div>
+            <div class="g-title" style="font-size:16px; margin-top:16px;">Data Model</div>
+            <div class="g-intro">Tarantool is a NoSQL database. It stores data in <span style="color:var(--accent);">spaces</span>, which can be thought of as tables, and <span style="color:var(--accent);">tuples</span>, analogous to rows.</div>
+            <div class="g-note"><strong>Note:</strong> For details on persistence and recovery, see the Data Persistence section.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Route4Me -->
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-preview">
+          <span class="preview-label">User Guide · Route4Me</span>
+          <div class="preview-mockup guide-mock">
+            <div class="g-breadcrumb">Guide 4 Route Planners › Optimization Types</div>
+            <div class="g-title">Single & Multiple Driver Routes</div>
+            <div class="g-intro">Planning a route with multiple destinations is a complex optimization problem. Route4Me's route planning software finds the optimal sequence automatically.</div>
+            <div style="margin-top:14px;">
+              <div class="g-step">
+                <div class="g-step-num">1</div>
+                <div class="g-step-text"><strong>Upload addresses</strong> — import a list of stops via CSV, spreadsheet, or manual entry.</div>
+              </div>
+              <div class="g-step">
+                <div class="g-step-num">2</div>
+                <div class="g-step-text"><strong>Set Business Rules</strong> — configure time windows, vehicle capacity, and driver skills.</div>
+              </div>
+              <div class="g-step">
+                <div class="g-step-num">3</div>
+                <div class="g-step-text"><strong>Optimize</strong> — click Optimize to generate the most efficient route sequence.</div>
+              </div>
+            </div>
+            <div class="g-note"><strong>Tip:</strong> Use Mixed Fleet mode to assign stops across vehicles of different capacities.</div>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-badge">Product User Guide</p>
+          <p class="project-client">Route4Me · Freelance</p>
+          <h2 class="project-title">User Guide — Route Optimization Platform</h2>
+          <p class="project-desc">Wrote structured user guides for Route4Me's route planning platform. Covered single and multi-driver optimization, business rules configuration, fleet management, and dispatching workflows. Content was organized with nested sidebar navigation, step-by-step procedures, screenshots, and contextual tips for non-technical end users.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>Step-by-step guides for route planning and optimization workflows</li>
+              <li>Sidebar-navigated help center structure (50+ articles)</li>
+              <li>Business rules and constraints documentation</li>
+              <li>Dispatcher and driver onboarding guides</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">Help center</span>
+            <span class="result-pill">50+ articles</span>
+            <span class="result-pill">B2B SaaS</span>
+            <span class="result-pill">Logistics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MyOffice -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-info">
+          <p class="project-badge">Help Center</p>
+          <p class="project-client">MyOffice (Mailion) · 2019–2022</p>
+          <h2 class="project-title">Help Center — Enterprise Email & Calendar Platform</h2>
+          <p class="project-desc">Created the full help center for Mailion, an enterprise email and calendar platform with 100K+ users. Covered email configuration, calendar management, event workflows, and administrative tasks. Writing reduced support requests by 50% and improved user onboarding significantly. Worked directly with UX and product teams to align documentation with interface changes.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>Email setup guides (Microsoft Outlook, IMAP/SMTP configuration)</li>
+              <li>Calendar workflows: creating events, invitations, acceptances</li>
+              <li>Admin documentation for enterprise deployments</li>
+              <li>Structured sidebar navigation with nested categories</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">−50% support requests</span>
+            <span class="result-pill">100K+ users</span>
+            <span class="result-pill">Enterprise</span>
+          </div>
+        </div>
+        <div class="project-preview">
+          <span class="preview-label">Help Center · MyOffice Mailion</span>
+          <div class="preview-mockup guide-mock">
+            <div class="g-breadcrumb">Calendar › Working with Events › Accept Invitation</div>
+            <div class="g-title">Accept an Event Invitation</div>
+            <div class="g-intro">An invited participant can accept, tentatively accept, or decline a calendar event from the event viewer or directly from the invitation email.</div>
+            <div style="margin-top:14px;">
+              <div class="g-step">
+                <div class="g-step-num">1</div>
+                <div class="g-step-text">On the <strong>Calendar</strong> tab, double-click the event in the Time Grid or Event List. The event view opens.</div>
+              </div>
+              <div class="g-step">
+                <div class="g-step-num">2</div>
+                <div class="g-step-text">Click <strong>Accept</strong>, <strong>Tentative</strong>, or <strong>Decline</strong> in the event toolbar.</div>
+              </div>
+              <div class="g-step">
+                <div class="g-step-num">3</div>
+                <div class="g-step-text"><strong>Accept</strong>: the event appears in your calendar as <strong>Accepted</strong> and is highlighted.</div>
+              </div>
+            </div>
+            <div class="g-note"><strong>Note:</strong> Declined events remain in the calendar in a dimmed state by default.</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="case-card">
-    <div class="case-meta">
-      <div class="case-metric">−50%</div>
-      <div class="case-metric-label">support requests</div>
-      <p class="case-client">Dnevnik.ru</p>
-      <p class="case-year">2016 – 2019 · Russia</p>
+  <!-- ── 3. INSTALLATION GUIDES ── -->
+  <div class="cat-section" id="install">
+    <div class="cat-header">
+      <span class="cat-icon">⚙️</span>
+      <span class="cat-title">Installation & Setup Guides</span>
+      <span class="cat-count">2 projects</span>
     </div>
-    <div class="case-content">
-      <h2 class="case-title">Technical Writer — EdTech Platform Documentation</h2>
-      <p class="case-desc">Documented and tested RESTful and SOAP APIs for government service integrations (Gosuslugi). Created interactive Figma prototypes and mockups. Delivered structured user training programs that reduced support requests by 50% and improved product adoption. Drove process automation that increased team productivity by 30%.</p>
-      <div class="case-results">
-        <span class="result-pill">−50% support requests</span>
-        <span class="result-pill">+30% productivity</span>
-        <span class="result-pill">Gov API integration</span>
+
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-info">
+          <p class="project-badge">Installation Guide</p>
+          <p class="project-client">MyOffice (Mailion) · Enterprise</p>
+          <h2 class="project-title">Installation Guides — DNS & Redis Configuration</h2>
+          <p class="project-desc">Wrote installation and configuration guides for enterprise deployment of Mailion. Covered DNS setup for corporate email domains, Redis caching layer configuration, and environment validation procedures. Written for system administrators with varying levels of Linux and infrastructure experience.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>DNS configuration guide — MX, SPF, DKIM, DMARC setup</li>
+              <li>Redis installation and tuning guide for email caching</li>
+              <li>Environment validation checklists and troubleshooting sections</li>
+              <li>Email setup guide for Microsoft Outlook (Exchange + IMAP)</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">DNS / MX / SPF / DKIM</span>
+            <span class="result-pill">Redis</span>
+            <span class="result-pill">Microsoft Outlook</span>
+            <span class="result-pill">Enterprise deployment</span>
+          </div>
+        </div>
+        <div class="project-preview">
+          <span class="preview-label">Installation Guide</span>
+          <div class="preview-mockup guide-mock">
+            <div class="g-title" style="font-size:15px; margin-bottom:10px;">Installation Guide: DNS Configuration</div>
+            <div class="g-intro">Before installing Mailion, configure the following DNS records for your domain. All records must propagate before proceeding.</div>
+            <div style="margin-top:12px; font-family: monospace; font-size:11px; background: rgba(0,0,0,0.3); border-radius:8px; padding: 12px;">
+              <div style="color:var(--muted); margin-bottom:6px;"># Required DNS records</div>
+              <div style="color:#c3e88d; margin-bottom:3px;">MX &nbsp; @ &nbsp; mail.yourdomain.com &nbsp; Priority 10</div>
+              <div style="color:#c3e88d; margin-bottom:3px;">TXT &nbsp; @ &nbsp; "v=spf1 include:_spf.yourdomain.com ~all"</div>
+              <div style="color:#c3e88d; margin-bottom:3px;">TXT &nbsp; _dmarc &nbsp; "v=DMARC1; p=quarantine"</div>
+            </div>
+            <div class="g-step" style="margin-top:12px;">
+              <div class="g-step-num">1</div>
+              <div class="g-step-text">Log into your DNS provider and navigate to <strong>DNS Management</strong>.</div>
+            </div>
+            <div class="g-step">
+              <div class="g-step-num">2</div>
+              <div class="g-step-text">Add the MX record pointing to your mail server hostname.</div>
+            </div>
+            <div class="g-note"><strong>Note:</strong> DNS propagation can take up to 48 hours. Verify with <code style="font-size:11px;">nslookup</code>.</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="case-card">
-    <div class="case-meta">
-      <div class="case-metric">1000+</div>
-      <div class="case-metric-label">documents structured</div>
-      <p class="case-client">SeaProject</p>
-      <p class="case-year">2014 – 2016</p>
+  <!-- ── 4. RELEASE NOTES ── -->
+  <div class="cat-section" id="release">
+    <div class="cat-header">
+      <span class="cat-icon">📋</span>
+      <span class="cat-title">Release Notes & Changelogs</span>
+      <span class="cat-count">2 projects</span>
     </div>
-    <div class="case-content">
-      <h2 class="case-title">Technical Writer & BA — Maritime Systems Documentation</h2>
-      <p class="case-desc">Designed and documented complex SQL data models for distributed maritime systems (PostgreSQL, MySQL). Created use cases, process diagrams, and data flow charts. Structured and digitized 1,000+ archival and regulatory documents. Automated annual report preparation, reducing the time required from two weeks to one day.</p>
-      <div class="case-results">
-        <span class="result-pill">2 weeks → 1 day reporting</span>
-        <span class="result-pill">1000+ docs structured</span>
-        <span class="result-pill">SQL data models</span>
+
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-preview">
+          <span class="preview-label">Changelog · Tarantool</span>
+          <div class="preview-mockup changelog-mock">
+            <div class="version">
+              <span class="v-tag">v3.1.0</span><span class="v-date">March 2024</span>
+              <div style="margin-top:8px;">
+                <span class="change-type type-added">Added</span>
+                <div class="change-item">New <code style="font-size:11px; color:var(--accent);">vshard.storage.on_bucket_event()</code> trigger API</div>
+                <div class="change-item">Support for <code style="font-size:11px; color:var(--accent);">bucket_data_recv_txn</code> event type</div>
+              </div>
+              <div style="margin-top:8px;">
+                <span class="change-type type-fixed">Fixed</span>
+                <div class="change-item">Rebalancer no longer skips buckets with pending transactions</div>
+                <div class="change-item">Memory leak in storage fiber on hot reload</div>
+              </div>
+            </div>
+            <div class="version">
+              <span class="v-tag">v3.0.2</span><span class="v-date">January 2024</span>
+              <div style="margin-top:8px;">
+                <span class="change-type type-changed">Changed</span>
+                <div class="change-item">Default rebalancing threshold reduced from 1% to 0.1%</div>
+              </div>
+              <div style="margin-top:8px;">
+                <span class="change-type type-fixed">Fixed</span>
+                <div class="change-item">Race condition in router failover on shard topology change</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-badge">Release Documentation</p>
+          <p class="project-client">VK / Tarantool + RoboMarkets</p>
+          <h2 class="project-title">Release Notes & Versioned Changelogs</h2>
+          <p class="project-desc">Wrote and maintained versioned release notes and changelogs for both Tarantool (developer-facing, open-source) and RoboMarkets trading platforms (business and compliance-facing). Structured changes by type (Added / Fixed / Changed / Deprecated), linked to relevant documentation, and maintained version history archives.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>Versioned changelogs with categorized change types</li>
+              <li>Developer-facing release notes with migration guides</li>
+              <li>Business-facing release summaries for non-technical stakeholders</li>
+              <li>Deprecation notices with migration paths</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">Semantic versioning</span>
+            <span class="result-pill">Developer & business</span>
+            <span class="result-pill">Multi-audience</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── 5. COMPLIANCE ── -->
+  <div class="cat-section" id="compliance">
+    <div class="cat-header">
+      <span class="cat-icon">🔒</span>
+      <span class="cat-title">Compliance & Regulatory Documentation</span>
+      <span class="cat-count">2 projects</span>
+    </div>
+
+    <div class="cards-grid">
+      <div class="mini-card">
+        <div class="mini-icon">🏦</div>
+        <div class="mini-title">KYC/AML Documentation</div>
+        <div class="mini-desc">Documented identity verification flows, document upload requirements, and risk-scoring logic for EU-regulated FinTech operations under CySEC framework.</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-icon">📊</div>
+        <div class="mini-title">Regulatory Reporting</div>
+        <div class="mini-desc">Owned end-to-end documentation for 5+ regulatory and internal reporting streams at Sberbank Technologies, ensuring audit-ready consistency across workstreams.</div>
+      </div>
+      <div class="mini-card">
+        <div class="mini-icon">🗂️</div>
+        <div class="mini-title">Maritime Systems</div>
+        <div class="mini-desc">Structured and digitized 1,000+ archival and regulatory documents for distributed maritime systems at SeaProject. Automated annual reporting from 2 weeks to 1 day.</div>
       </div>
     </div>
   </div>
 
 </div>
 
+<!-- CTA -->
 <div class="page-cta">
-  <h2>Need documentation that actually works?</h2>
-  <p>Let's talk about your product.</p>
+  <h2>Need documentation that ships with your product?</h2>
+  <p>API docs, help centers, guides — let's talk scope and timeline.</p>
   <a href="mailto:mastrabykina@gmail.com" class="btn-primary">Get in Touch →</a>
 </div>
 
 <footer>© 2026 Maria Strabykina. All rights reserved.</footer>
+
+<script>
+  // Category nav highlight on scroll
+  const btns = document.querySelectorAll('.cat-btn');
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
 
 </body>
 </html>
