@@ -96,8 +96,24 @@
 
     footer { border-top: 1px solid var(--border); padding: 24px 48px; text-align: center; font-size: 13px; color: var(--muted); }
 
+    /* CATEGORY NAV */
+    .cat-nav {
+      max-width: 1400px; margin: 0 auto;
+      padding: 32px 48px 0;
+      display: flex; gap: 8px; flex-wrap: wrap;
+      border-bottom: 1px solid var(--border);
+    }
+    .cat-btn {
+      padding: 8px 18px; border-radius: 8px;
+      font-size: 13px; font-weight: 600;
+      text-decoration: none; transition: all 0.2s;
+      border: 1px solid var(--border2); color: var(--text);
+      background: var(--bg2); cursor: pointer;
+    }
+    .cat-btn:hover, .cat-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
     @media (max-width: 900px) {
-      nav, .page-header, .content { padding-left: 24px; padding-right: 24px; }
+      nav, .page-header, .cat-nav, .content { padding-left: 24px; padding-right: 24px; }
       .project-inner, .project-inner.reverse { grid-template-columns: 1fr; }
       .project-preview { min-height: 200px; border-left: none !important; border-right: none !important; border-top: 1px solid var(--border); }
       footer { padding: 24px; }
@@ -178,10 +194,19 @@
   </div>
 </div>
 
+<!-- CATEGORY NAV -->
+<div class="cat-nav">
+  <button class="cat-btn active" data-filter="all">All</button>
+  <button class="cat-btn" data-filter="seo">SEO Blog & Editorial</button>
+  <button class="cat-btn" data-filter="landing">Landing Pages & Conversion Copy</button>
+  <button class="cat-btn" data-filter="email">Email & Ad Copy</button>
+  <button class="cat-btn" data-filter="ghost">Ghostwriting & Thought Leadership</button>
+</div>
+
 <div class="content">
 
   <!-- ── 1. SEO BLOG & EDITORIAL ── -->
-  <div class="cat-section">
+  <div class="cat-section" id="seo" data-cat="seo">
     <div class="cat-header">
       <span class="cat-title">SEO Blog & Editorial</span>
       <span class="cat-count">2 projects</span>
@@ -287,10 +312,10 @@
       </div>
     </div>
 
-  </div><!-- /cat-section -->
+  </div><!-- /cat-section seo -->
 
   <!-- ── 2. LANDING PAGES & CONVERSION COPY ── -->
-  <div class="cat-section">
+  <div class="cat-section" id="landing" data-cat="landing">
     <div class="cat-header">
       <span class="cat-title">Landing Pages & Conversion Copy</span>
       <span class="cat-count">2 projects</span>
@@ -393,11 +418,160 @@
       </div>
     </div>
 
-  </div><!-- /cat-section -->
+  </div><!-- /cat-section landing -->
+
+  <!-- ── 3. EMAIL & AD COPY ── -->
+  <div class="cat-section" id="email" data-cat="email">
+    <div class="cat-header">
+      <span class="cat-title">Email & Ad Copy</span>
+      <span class="cat-count">1 project</span>
+    </div>
+
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-info">
+          <p class="project-badge">Email & Ads</p>
+          <p class="project-client">RoboMarkets · MyOffice · Freelance</p>
+          <h2 class="project-title">Ad Campaigns & Email Sequences</h2>
+          <p class="project-desc">Created and iterated ad copy for Google, Meta, and TikTok campaigns across fintech and SaaS clients. Wrote multi-step email sequences for onboarding, retention, and re-engagement. Applied A/B testing frameworks to subject lines, headlines, and CTAs using performance data (CTR, CPA, open rates).</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>Google Ads and Meta Ads copy with A/B variants</li>
+              <li>TikTok ad scripts and captions</li>
+              <li>Email onboarding sequences (5–10 step drips)</li>
+              <li>Re-engagement and win-back campaigns</li>
+              <li>Subject line testing and CTR optimization</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">Google / Meta / TikTok</span>
+            <span class="result-pill">A/B tested</span>
+            <span class="result-pill">CTR / CPA optimization</span>
+            <span class="result-pill">EN / RU / DE</span>
+          </div>
+        </div>
+        <div class="project-preview">
+          <div class="doc-frame-content" style="padding: 28px 32px; overflow-y: auto;">
+            <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:18px;">Google Ads · A/B Test · FinTech</div>
+            <div style="margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid #f0f0f0;">
+              <div style="font-size:10px; color:#888; font-weight:600; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Headline variant A</div>
+              <div style="font-size:14px; font-weight:700; color:#1a77f2; margin-bottom:3px;">Trade Smarter With RoboMarkets</div>
+              <div style="font-size:12px; color:#444; margin-bottom:3px;">Access 12,000+ instruments. Low spreads, fast execution. Start today.</div>
+              <div style="font-size:11px; color:#888;">CTR: 2.1%</div>
+            </div>
+            <div style="margin-bottom:20px; padding-bottom:20px; border-bottom:1px solid #f0f0f0;">
+              <div style="font-size:10px; color:#166534; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:6px;">Headline variant B ✓ Winner</div>
+              <div style="font-size:14px; font-weight:700; color:#1a77f2; margin-bottom:3px;">Open a Free Account in 3 Minutes</div>
+              <div style="font-size:12px; color:#444; margin-bottom:3px;">12,000+ instruments · Regulated broker · No hidden fees. Trade now.</div>
+              <div style="font-size:11px; color:#166534; font-weight:600;">CTR: 3.8% · +81%</div>
+            </div>
+            <div style="font-size:11px; color:#888; text-transform:uppercase; letter-spacing:1px; font-weight:600; margin-bottom:10px;">Email sequence · Day 1 subject lines</div>
+            <div style="display:flex; flex-direction:column; gap:8px;">
+              <div style="background:#f8fafc; border-radius:6px; padding:8px 12px; font-size:12px; color:#444;">🎉 <strong>Welcome to RoboMarkets.</strong> Here's how to make your first trade.</div>
+              <div style="background:#f8fafc; border-radius:6px; padding:8px 12px; font-size:12px; color:#444;">📈 Your account is ready. Don't leave it empty.</div>
+              <div style="background:#eff6ff; border-radius:6px; padding:8px 12px; font-size:12px; color:#1d4ed8; border:1px solid #bfdbfe;">⚡ <strong>Last chance:</strong> Your demo account expires in 48h.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cat-section email -->
+
+  <!-- ── 4. GHOSTWRITING & THOUGHT LEADERSHIP ── -->
+  <div class="cat-section" id="ghost" data-cat="ghost">
+    <div class="cat-header">
+      <span class="cat-title">Ghostwriting & Thought Leadership</span>
+      <span class="cat-count">1 project</span>
+    </div>
+
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-preview">
+          <div class="doc-frame-content" style="padding: 28px 32px; overflow-y: auto;">
+            <div style="display:flex; align-items:center; gap:10px; margin-bottom:16px;">
+              <div style="width:36px; height:36px; border-radius:50%; background:#0a66c2; display:flex; align-items:center; justify-content:center; color:#fff; font-size:14px; font-weight:700; flex-shrink:0;">A</div>
+              <div>
+                <div style="font-size:13px; font-weight:700; color:#1a1a1a;">Alex Thornton</div>
+                <div style="font-size:11px; color:#888;">CEO at TechCorp · 4,200 followers</div>
+              </div>
+            </div>
+            <p style="font-size:13px; color:#1a1a1a; line-height:1.75; margin-bottom:12px;">I've reviewed hundreds of pitch decks. Here's what separates the ones that close from the ones that don't:</p>
+            <p style="font-size:13px; color:#444; line-height:1.75; margin-bottom:12px;">Most founders bury their best line on slide 9. The investors who passed already checked out on slide 3.</p>
+            <p style="font-size:13px; color:#444; line-height:1.75; margin-bottom:16px;">The decks that close open with a single sentence that makes you feel the problem. Not describe it — <em>feel</em> it.</p>
+            <div style="background:#f8fafc; border-left:3px solid #0a66c2; padding:10px 14px; border-radius:0 6px 6px 0; margin-bottom:14px;">
+              <p style="font-size:13px; color:#444; line-height:1.7;">"Every year, $1.2 trillion in enterprise software goes unused because employees can't figure out how to use it. We fix that in 7 days."</p>
+            </div>
+            <p style="font-size:12px; color:#888;">That's a hook. That's what we're building toward.</p>
+            <div style="display:flex; gap:16px; margin-top:16px; font-size:12px; color:#888;">
+              <span>👍 847 likes</span>
+              <span>💬 143 comments</span>
+              <span>🔁 312 reposts</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-badge">Ghostwriting</p>
+          <p class="project-client">Freelance · International Founders</p>
+          <h2 class="project-title">Founder Ghostwriting & LinkedIn Thought Leadership</h2>
+          <p class="project-desc">Ghostwrote LinkedIn content, long-form articles, and founder narratives for CEOs and startup founders across SaaS, FinTech, and EdTech. Built consistent brand voices, content systems, and publishing cadences. Content regularly achieved 500–2,000+ engagements per post.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>Weekly LinkedIn posts ghostwritten in founder's voice</li>
+              <li>Long-form thought leadership articles for Medium and company blogs</li>
+              <li>Brand voice guides and tone-of-voice documentation</li>
+              <li>Content calendars and topic ideation systems</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">LinkedIn content</span>
+            <span class="result-pill">Founder voice</span>
+            <span class="result-pill">500–2K+ engagements</span>
+            <span class="result-pill">Brand voice</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /cat-section ghost -->
 
 </div><!-- /content -->
 
 <footer>© 2026 Maria Strabykina. All rights reserved.</footer>
+
+<script>
+  const btns = document.querySelectorAll('.cat-btn');
+  const sections = document.querySelectorAll('.cat-section');
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const filter = btn.dataset.filter;
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      sections.forEach(sec => {
+        if (filter === 'all' || sec.dataset.cat === filter) {
+          sec.style.display = '';
+          sec.style.opacity = '0';
+          sec.style.transform = 'translateY(12px)';
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              sec.style.transition = 'opacity 0.28s ease, transform 0.28s ease';
+              sec.style.opacity = '1';
+              sec.style.transform = 'translateY(0)';
+            });
+          });
+        } else {
+          sec.style.transition = 'none';
+          sec.style.display = 'none';
+          sec.style.opacity = '';
+          sec.style.transform = '';
+        }
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
