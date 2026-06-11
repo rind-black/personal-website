@@ -92,6 +92,7 @@
       font-size: 13px; font-weight: 600;
       text-decoration: none; transition: all 0.2s;
       border: 1px solid var(--border2); color: var(--text);
+      background: var(--bg2);
       cursor: pointer;
     }
     .cat-btn:hover, .cat-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; }
@@ -757,44 +758,43 @@
     <div class="project-card">
       <div class="project-inner reverse">
         <div class="project-preview">
-          <div class="preview-label">Changelog · Tarantool / VK</div>
-          <div class="preview-mockup" style="overflow-y:auto;">
-            <div style="font-family:'Sora',sans-serif; font-size:16px; font-weight:700; color:var(--text); margin-bottom:4px; letter-spacing:-0.3px;">Tarantool Changelog</div>
-            <div style="font-size:11px; color:var(--muted); margin-bottom:18px;">vshard module · maintained by Technical Writing team</div>
+          <div class="doc-frame-content" style="padding: 28px 32px; overflow-y: auto;">
+            <div style="font-family:'Sora',sans-serif; font-size:18px; font-weight:700; color:#1a1a1a; margin-bottom:4px; letter-spacing:-0.3px;">Tarantool Changelog</div>
+            <div style="font-size:12px; color:#888; margin-bottom:22px;">vshard module · maintained by Technical Writing team</div>
 
             <!-- v3.1.0 -->
-            <div style="margin-bottom:18px;">
-              <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                <span style="background:rgba(79,142,247,0.12); border:1px solid rgba(79,142,247,0.3); color:var(--accent); font-family:monospace; font-size:12px; font-weight:700; padding:3px 10px; border-radius:5px;">v3.1.0</span>
-                <span style="font-size:11px; color:var(--muted);">March 15, 2024</span>
+            <div style="margin-bottom:20px;">
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                <span style="background:#eff6ff; border:1px solid #bfdbfe; color:#2563eb; font-family:monospace; font-size:12px; font-weight:700; padding:3px 10px; border-radius:5px;">v3.1.0</span>
+                <span style="font-size:12px; color:#888;">March 15, 2024</span>
               </div>
-              <div style="margin-bottom:8px;">
-                <div style="display:inline-block; background:rgba(22,163,74,0.12); color:#4ade80; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:6px;">Added</div>
-                <div style="font-size:12px; color:var(--text2); padding-left:12px; margin-bottom:4px; line-height:1.6;">New <code style="font-family:monospace; font-size:11px; color:#82aaff;">vshard.storage.on_bucket_event()</code> trigger API for rebalancing hooks</div>
-                <div style="font-size:12px; color:var(--text2); padding-left:12px; line-height:1.6;">Support for <code style="font-family:monospace; font-size:11px; color:#82aaff;">bucket_data_recv_txn</code> event type</div>
+              <div style="margin-bottom:10px;">
+                <div style="display:inline-block; background:#dcfce7; color:#166534; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:8px;">Added</div>
+                <div style="font-size:13px; color:#444; padding-left:12px; margin-bottom:4px; line-height:1.6;">New <code style="font-family:monospace; font-size:11px; color:#2563eb; background:#eff6ff; padding:1px 5px; border-radius:3px;">vshard.storage.on_bucket_event()</code> trigger API for rebalancing hooks</div>
+                <div style="font-size:13px; color:#444; padding-left:12px; line-height:1.6;">Support for <code style="font-family:monospace; font-size:11px; color:#2563eb; background:#eff6ff; padding:1px 5px; border-radius:3px;">bucket_data_recv_txn</code> event type</div>
               </div>
               <div>
-                <div style="display:inline-block; background:rgba(234,179,8,0.10); color:#fbbf24; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:6px;">Fixed</div>
-                <div style="font-size:12px; color:var(--text2); padding-left:12px; margin-bottom:4px; line-height:1.6;">Rebalancer no longer skips buckets with pending transactions</div>
-                <div style="font-size:12px; color:var(--text2); padding-left:12px; line-height:1.6;">Memory leak in storage fiber on hot reload</div>
+                <div style="display:inline-block; background:#fef9c3; color:#854d0e; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:8px;">Fixed</div>
+                <div style="font-size:13px; color:#444; padding-left:12px; margin-bottom:4px; line-height:1.6;">Rebalancer no longer skips buckets with pending transactions</div>
+                <div style="font-size:13px; color:#444; padding-left:12px; line-height:1.6;">Memory leak in storage fiber on hot reload</div>
               </div>
             </div>
 
-            <div style="border-top:1px solid var(--border); margin-bottom:16px;"></div>
+            <div style="border-top:1px solid #e5e7eb; margin-bottom:20px;"></div>
 
             <!-- v3.0.2 -->
             <div>
-              <div style="display:flex; align-items:center; gap:10px; margin-bottom:10px;">
-                <span style="background:rgba(79,142,247,0.07); border:1px solid var(--border2); color:var(--text2); font-family:monospace; font-size:12px; font-weight:700; padding:3px 10px; border-radius:5px;">v3.0.2</span>
-                <span style="font-size:11px; color:var(--muted);">January 8, 2024</span>
+              <div style="display:flex; align-items:center; gap:10px; margin-bottom:12px;">
+                <span style="background:#f8fafc; border:1px solid #cbd5e1; color:#334155; font-family:monospace; font-size:12px; font-weight:700; padding:3px 10px; border-radius:5px;">v3.0.2</span>
+                <span style="font-size:12px; color:#888;">January 8, 2024</span>
               </div>
-              <div style="margin-bottom:8px;">
-                <div style="display:inline-block; background:rgba(139,92,246,0.12); color:#a78bfa; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:6px;">Changed</div>
-                <div style="font-size:12px; color:var(--text2); padding-left:12px; line-height:1.6;">Default rebalancing threshold reduced from 1% to 0.1% for better balance accuracy</div>
+              <div style="margin-bottom:10px;">
+                <div style="display:inline-block; background:#f3e8ff; color:#6b21a8; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:8px;">Changed</div>
+                <div style="font-size:13px; color:#444; padding-left:12px; line-height:1.6;">Default rebalancing threshold reduced from 1% to 0.1% for better balance accuracy</div>
               </div>
               <div>
-                <div style="display:inline-block; background:rgba(234,179,8,0.10); color:#fbbf24; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:6px;">Fixed</div>
-                <div style="font-size:12px; color:var(--text2); padding-left:12px; line-height:1.6;">Race condition in router failover on shard topology change</div>
+                <div style="display:inline-block; background:#fef9c3; color:#854d0e; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:1px; padding:2px 8px; border-radius:4px; margin-bottom:8px;">Fixed</div>
+                <div style="font-size:13px; color:#444; padding-left:12px; line-height:1.6;">Race condition in router failover on shard topology change</div>
               </div>
             </div>
           </div>
