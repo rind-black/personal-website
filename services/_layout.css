@@ -48,16 +48,23 @@ nav {
 }
 
 .nav-back {
-  font-size: 14px;
-  color: var(--muted);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
   text-decoration: none;
   display: flex;
   align-items: center;
-  gap: 8px;
-  transition: color 0.2s;
+  gap: 7px;
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 7px 14px;
+  background: var(--bg2);
+  transition: all 0.2s;
 }
 
-.nav-back:hover { color: var(--text); }
+.nav-back:hover { color: var(--text); border-color: var(--accent); background: rgba(79,142,247,0.08); }
+.nav-back svg { transition: transform 0.2s; }
+.nav-back:hover svg { transform: translateX(-3px); }
 
 .nav-cta {
   background: var(--accent);
