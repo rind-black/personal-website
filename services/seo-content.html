@@ -6,7 +6,103 @@
   <title>SEO Content Strategy & Writing — Maria Strabykina</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="_layout.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    a { color: inherit; }
+
+    :root {
+      --bg:      #0e0e16;
+      --bg2:     #13131d;
+      --bg3:     #1a1a26;
+      --border:  #22222f;
+      --border2: #2e2e3e;
+      --text:    #f0f0f5;
+      --text2:   #b0b3c8;
+      --muted:   #7c8099;
+      --muted2:  #565870;
+      --accent:  #4f8ef7;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(14,14,22,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 48px; height: 68px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Sora', sans-serif; font-weight: 700; font-size: 16px; color: var(--text); text-decoration: none; }
+    .nav-back {
+      font-size: 13px; font-weight: 600; color: var(--text2);
+      text-decoration: none; display: flex; align-items: center; gap: 7px;
+      border: 1px solid var(--border2); border-radius: 8px;
+      padding: 7px 14px; background: var(--bg2); transition: all 0.2s;
+    }
+    .nav-back:hover { color: var(--text); border-color: var(--accent); background: rgba(79,142,247,0.08); }
+    .nav-back svg { transition: transform 0.2s; }
+    .nav-back:hover svg { transform: translateX(-3px); }
+    .nav-cta { background: var(--accent); color: #fff; padding: 9px 22px; border-radius: 8px; font-size: 13px; font-weight: 700; text-decoration: none; transition: opacity 0.2s; }
+    .nav-cta:hover { opacity: 0.85; }
+
+    .page-header { padding: 120px 48px 64px; max-width: 1400px; margin: 0 auto; border-bottom: 1px solid var(--border); }
+    .breadcrumb { font-size: 13px; color: var(--muted); margin-bottom: 20px; display: flex; align-items: center; gap: 8px; }
+    .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--text2); }
+
+    .page-title { font-family: 'Sora', sans-serif; font-size: clamp(32px, 4.5vw, 56px); font-weight: 800; letter-spacing: -2px; line-height: 1.05; color: var(--text); margin-bottom: 16px; }
+    .page-title em { font-style: normal; color: var(--accent); }
+
+    .meta-row { display: grid; grid-template-columns: auto 1fr; gap: 16px 40px; align-items: start; margin-bottom: 32px; }
+    .meta-item { display: contents; }
+    .meta-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); padding-top: 2px; white-space: nowrap; }
+    .meta-value { font-size: 13px; font-weight: 500; color: var(--text); line-height: 1.6; }
+
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { background: var(--bg3); border: 1px solid var(--border2); color: var(--text2); font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 6px; }
+
+    .content { max-width: 1400px; margin: 0 auto; padding: 64px 48px; }
+
+    .cat-section { margin-bottom: 80px; }
+    .cat-header { display: flex; align-items: center; gap: 16px; margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .cat-title { font-family: 'Sora', sans-serif; font-size: 22px; font-weight: 700; color: var(--text); letter-spacing: -0.5px; }
+    .cat-count { font-size: 13px; color: var(--muted); background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; padding: 3px 12px; font-weight: 600; }
+
+    .project-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 16px; overflow: hidden; margin-bottom: 20px; transition: border-color 0.2s; }
+    .project-card:hover { border-color: var(--border2); }
+    .project-card.featured { border-color: var(--border2); }
+
+    .project-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+    .project-inner.reverse { grid-template-columns: 1fr 1fr; }
+
+    .project-info { padding: 44px 48px; }
+    .project-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent); margin-bottom: 16px; }
+    .project-badge::before { content: ''; width: 6px; height: 6px; background: var(--accent); border-radius: 50%; }
+    .project-client { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted2); margin-bottom: 10px; }
+    .project-title { font-family: 'Sora', sans-serif; font-size: 20px; font-weight: 700; color: var(--text); letter-spacing: -0.3px; margin-bottom: 14px; line-height: 1.25; }
+    .project-desc { font-size: 14px; color: var(--text2); line-height: 1.75; margin-bottom: 24px; }
+    .project-deliverables { margin-bottom: 24px; }
+    .deliverables-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted2); margin-bottom: 10px; }
+    .deliverables-list { list-style: none; display: flex; flex-direction: column; gap: 6px; }
+    .deliverables-list li { font-size: 13px; color: var(--text2); display: flex; align-items: flex-start; gap: 8px; }
+    .deliverables-list li::before { content: '→'; color: var(--accent); font-weight: 700; flex-shrink: 0; margin-top: 1px; }
+    .result-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .result-pill { background: var(--bg3); border: 1px solid var(--border2); border-radius: 6px; padding: 4px 12px; font-size: 12px; font-weight: 600; color: var(--text2); }
+
+    .project-preview { background: #f5f5f7; border-left: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; min-height: 420px; padding: 0; }
+    .project-inner.reverse .project-preview { border-left: none; border-right: 1px solid var(--border); }
+    .doc-frame-content { flex: 1; overflow-y: auto; padding: 0; background: #ffffff; font-family: 'Inter', sans-serif; font-size: 12px; min-height: 380px; }
+
+    footer { border-top: 1px solid var(--border); padding: 24px 48px; text-align: center; font-size: 13px; color: var(--muted); }
+
+    @media (max-width: 900px) {
+      nav, .page-header, .content { padding-left: 24px; padding-right: 24px; }
+      .project-inner, .project-inner.reverse { grid-template-columns: 1fr; }
+      .project-preview { min-height: 200px; border-left: none !important; border-right: none !important; border-top: 1px solid var(--border); }
+      footer { padding: 24px; }
+    }
+  </style>
 </head>
 <body>
 
@@ -24,99 +120,266 @@
     <a href="../index.html">Home</a> <span>/</span> <span>SEO Content</span>
   </div>
   <h1 class="page-title">SEO Content Strategy<br><em>& Writing</em></h1>
-  <p class="page-desc">Blog posts, landing pages, and case studies built to rank and convert. Proven +40% organic traffic in 60 days across 100+ published articles.</p>
-  <div class="page-tags">
+
+  <div class="meta-row">
+    <div class="meta-item">
+      <div class="meta-label">Experience</div>
+      <div class="meta-value">10+ years</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Industries</div>
+      <div class="meta-value">FinTech · EdTech · SaaS · E-commerce · Enterprise Software · Logistics · Mining · AI / ML · Entertainment · GameDev</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Languages</div>
+      <div class="meta-value">English · Russian · German · Spanish</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-label">Tools</div>
+      <div class="meta-value">Ahrefs · SEMrush · Google Search Console · Surfer SEO · ChatGPT · Jasper · WordPress · Tilda · Notion · Google Docs · Canva · Figma · Google Analytics · Amplitude · Hotjar</div>
+    </div>
+  </div>
+
+  <div class="tag-row">
     <span class="tag">SEO Strategy</span>
     <span class="tag">Blog Content</span>
     <span class="tag">Landing Pages</span>
     <span class="tag">Copywriting</span>
     <span class="tag">A/B Testing</span>
     <span class="tag">CTR / CPA Optimization</span>
-    <span class="tag">EN / RU / DE</span>
+    <span class="tag">Ad Copy</span>
+    <span class="tag">Email Campaigns</span>
+    <span class="tag">Case Studies</span>
+    <span class="tag">White Papers</span>
+    <span class="tag">Product Descriptions</span>
+    <span class="tag">UX Copy</span>
+    <span class="tag">Social Media</span>
+    <span class="tag">Newsletter Sequences</span>
+    <span class="tag">Ghostwriting</span>
+    <span class="tag">Brand Voice</span>
+    <span class="tag">Content Systems</span>
+    <span class="tag">EN · RU · DE · ES</span>
   </div>
 </div>
 
-<div class="cases-section">
-  <p class="cases-label">Selected Cases</p>
+<div class="content">
 
-  <div class="case-card">
-    <div class="case-meta">
-      <div class="case-metric">+40%</div>
-      <div class="case-metric-label">organic traffic in 60 days</div>
-      <p class="case-client">Legacy Online School</p>
-      <p class="case-year">2024 – 2026 · US & Canada</p>
+  <!-- ── 1. SEO BLOG & EDITORIAL ── -->
+  <div class="cat-section">
+    <div class="cat-header">
+      <span class="cat-title">SEO Blog & Editorial</span>
+      <span class="cat-count">2 projects</span>
     </div>
-    <div class="case-content">
-      <h2 class="case-title">SEO Copywriter — 100+ Articles, US & Canada School Market</h2>
-      <p class="case-desc">Built the WordPress site from scratch and wrote over 100 SEO-optimized articles, growing organic traffic by 40% in under 2 months. Created branded educational content for the school's website and partner schools across the US and Canada. Content covered K-12 curriculum, admissions, and online learning topics optimized for American search intent.</p>
-      <div class="case-results">
-        <span class="result-pill">+40% organic traffic</span>
-        <span class="result-pill">100+ articles</span>
-        <span class="result-pill">60 days</span>
-        <span class="result-pill">US & Canada market</span>
+
+    <!-- Legacy Online School -->
+    <div class="project-card featured">
+      <div class="project-inner">
+        <div class="project-info">
+          <p class="project-badge">SEO Content</p>
+          <p class="project-client">Legacy Online School</p>
+          <h2 class="project-title">100+ SEO Articles – US & Canada School Market</h2>
+          <p class="project-desc">Built the WordPress site from scratch and wrote over 100 SEO-optimized articles, growing organic traffic by 40% in under 2 months. Created branded educational content for the school's website and partner schools across the US and Canada. Content covered K-12 curriculum, admissions, and online learning topics optimized for American search intent.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>100+ SEO-optimized blog articles targeting US & Canada search intent</li>
+              <li>WordPress site build and content architecture</li>
+              <li>On-page SEO: meta titles, descriptions, internal linking</li>
+              <li>Content calendar and editorial system</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">+40% organic traffic</span>
+            <span class="result-pill">100+ articles</span>
+            <span class="result-pill">60 days</span>
+            <span class="result-pill">US & Canada</span>
+          </div>
+        </div>
+        <div class="project-preview">
+          <div class="doc-frame-content" style="padding: 32px 36px; overflow-y: auto;">
+            <div style="font-size:11px; color:#888; margin-bottom:16px;">legacyonlineschool.com › blog</div>
+            <h1 style="font-size:22px; font-weight:800; color:#1a1a1a; margin-bottom:10px; line-height:1.2; letter-spacing:-0.5px;">What Is Online School? A Complete Guide for Parents in 2024</h1>
+            <div style="display:flex; align-items:center; gap:12px; margin-bottom:20px; padding-bottom:16px; border-bottom:1px solid #f0f0f0;">
+              <span style="font-size:12px; color:#888;">8 min read</span>
+              <span style="color:#ddd;">·</span>
+              <span style="font-size:12px; color:#888;">Updated March 2024</span>
+              <span style="color:#ddd;">·</span>
+              <span style="background:#eff6ff; color:#2563eb; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px;">K-12 Education</span>
+            </div>
+            <p style="font-size:13px; color:#444; line-height:1.8; margin-bottom:16px;">Online schooling has become a mainstream choice for families across the United States and Canada. Whether you're looking for flexibility, a safer environment, or a stronger academic program — understanding how online school works is the first step.</p>
+            <div style="background:#f8fafc; border-left:3px solid #2563eb; padding:12px 16px; margin-bottom:16px; border-radius:0 6px 6px 0;">
+              <p style="font-size:12px; font-weight:700; color:#1a1a1a; margin-bottom:4px;">In this article:</p>
+              <ul style="list-style:none; display:flex; flex-direction:column; gap:4px;">
+                <li style="font-size:12px; color:#2563eb;">→ How online school works</li>
+                <li style="font-size:12px; color:#2563eb;">→ Accreditation and credits</li>
+                <li style="font-size:12px; color:#2563eb;">→ How to choose the right program</li>
+              </ul>
+            </div>
+            <h2 style="font-size:16px; font-weight:700; color:#1a1a1a; margin-bottom:8px;">How Online School Works</h2>
+            <p style="font-size:13px; color:#444; line-height:1.8;">Students attend live video classes, complete assignments through a learning management system, and interact with teachers and peers in real time. Most accredited online schools follow the same state standards as traditional schools.</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="case-card">
-    <div class="case-meta">
-      <div class="case-metric">B2B</div>
-      <div class="case-metric-label">FinTech content</div>
-      <p class="case-client">RoboMarkets</p>
-      <p class="case-year">2022 – 2024 · Cyprus / EU</p>
-    </div>
-    <div class="case-content">
-      <h2 class="case-title">Content Creator — FinTech Educational & Marketing Content</h2>
-      <p class="case-desc">Created high-quality educational and marketing content for B2B and B2C audiences in the fintech domain. Applied generative AI tools (ChatGPT, Jasper) to streamline copy iteration and A/B testing for ad campaigns. Content covered trading platforms, investment products, and regulatory topics across EU markets in EN, RU, and DE.</p>
-      <div class="case-results">
-        <span class="result-pill">B2B & B2C</span>
-        <span class="result-pill">AI-assisted A/B testing</span>
-        <span class="result-pill">EN / RU / DE</span>
-        <span class="result-pill">EU markets</span>
+    <!-- RoboMarkets -->
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-preview">
+          <div class="doc-frame-content" style="padding: 32px 36px; overflow-y: auto;">
+            <div style="font-size:11px; color:#888; margin-bottom:6px;">robomarkets.com › education</div>
+            <h1 style="font-size:20px; font-weight:800; color:#1a1a1a; margin-bottom:8px; line-height:1.2; letter-spacing:-0.4px;">What Is CFD Trading? Beginner's Guide to Contracts for Difference</h1>
+            <div style="display:flex; gap:8px; margin-bottom:16px; flex-wrap:wrap;">
+              <span style="background:#f0fdf4; color:#166534; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px;">FinTech</span>
+              <span style="background:#eff6ff; color:#1d4ed8; font-size:11px; font-weight:600; padding:2px 8px; border-radius:4px;">Beginner</span>
+              <span style="font-size:12px; color:#888; padding-top:2px;">6 min read</span>
+            </div>
+            <p style="font-size:13px; color:#444; line-height:1.8; margin-bottom:14px;">A Contract for Difference (CFD) is a financial instrument that allows traders to speculate on price movements without owning the underlying asset. CFDs are available on stocks, indices, commodities, and forex pairs.</p>
+            <div style="background:#fffbeb; border:1px solid #fde68a; border-radius:6px; padding:10px 14px; margin-bottom:14px;">
+              <p style="font-size:12px; color:#92400e;"><strong>Risk notice:</strong> CFD trading involves significant risk. Retail investor accounts lose money when trading CFDs. Ensure you understand how CFDs work before investing.</p>
+            </div>
+            <h2 style="font-size:15px; font-weight:700; color:#1a1a1a; margin-bottom:8px;">Key Benefits of CFD Trading</h2>
+            <ul style="list-style:disc; padding-left:18px; display:flex; flex-direction:column; gap:5px;">
+              <li style="font-size:13px; color:#444; line-height:1.6;">Trade long and short on the same platform</li>
+              <li style="font-size:13px; color:#444; line-height:1.6;">Access to global markets from one account</li>
+              <li style="font-size:13px; color:#444; line-height:1.6;">No stamp duty on most CFD instruments</li>
+            </ul>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-badge">Educational Content</p>
+          <p class="project-client">RoboMarkets</p>
+          <h2 class="project-title">FinTech Educational & Marketing Content</h2>
+          <p class="project-desc">Created high-quality educational and marketing content for B2B and B2C audiences in the fintech domain. Applied generative AI tools to streamline copy iteration and A/B testing for ad campaigns. Content covered trading platforms, investment products, and regulatory topics across EU markets in EN, RU, and DE.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>Educational articles on trading, investing, and financial instruments</li>
+              <li>Landing page copy for trading platform acquisition campaigns</li>
+              <li>Ad copy for Google, Meta, and YouTube campaigns</li>
+              <li>AI-assisted A/B testing of headlines and CTAs</li>
+              <li>Multilingual content (EN / RU / DE)</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">B2B & B2C</span>
+            <span class="result-pill">AI-assisted A/B</span>
+            <span class="result-pill">EN / RU / DE</span>
+            <span class="result-pill">EU markets</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="case-card">
-    <div class="case-meta">
-      <div class="case-metric">ROI+</div>
-      <div class="case-metric-label">via copy iteration</div>
-      <p class="case-client">MyOffice</p>
-      <p class="case-year">2019 – 2022 · Russia</p>
+  </div><!-- /cat-section -->
+
+  <!-- ── 2. LANDING PAGES & CONVERSION COPY ── -->
+  <div class="cat-section">
+    <div class="cat-header">
+      <span class="cat-title">Landing Pages & Conversion Copy</span>
+      <span class="cat-count">2 projects</span>
     </div>
-    <div class="case-content">
-      <h2 class="case-title">Content Creator — Enterprise Software Marketing Copy</h2>
-      <p class="case-desc">Created content for websites, blogs, email campaigns, and product presentations for an enterprise email platform with 100K+ users. Used performance data (CTR, CPA, conversion volume) to iterate copy and boost campaign ROI. Supported competitive analysis and feature positioning for the Mailion product launch.</p>
-      <div class="case-results">
-        <span class="result-pill">CTR / CPA optimization</span>
-        <span class="result-pill">Email campaigns</span>
-        <span class="result-pill">Enterprise SaaS</span>
-        <span class="result-pill">100K+ users</span>
+
+    <!-- MyOffice -->
+    <div class="project-card">
+      <div class="project-inner">
+        <div class="project-info">
+          <p class="project-badge">Marketing Copy</p>
+          <p class="project-client">MyOffice (Mailion)</p>
+          <h2 class="project-title">Enterprise Software Marketing Copy</h2>
+          <p class="project-desc">Created content for websites, blogs, email campaigns, and product presentations for an enterprise email platform with 100K+ users. Used performance data (CTR, CPA, conversion volume) to iterate copy and boost campaign ROI. Supported competitive analysis and feature positioning for the Mailion product launch.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>Product landing pages and feature announcement copy</li>
+              <li>Email campaign sequences for onboarding and retention</li>
+              <li>Blog content and thought leadership articles</li>
+              <li>CTR / CPA-driven copy iteration using performance data</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">CTR / CPA optimization</span>
+            <span class="result-pill">Email campaigns</span>
+            <span class="result-pill">Enterprise SaaS</span>
+            <span class="result-pill">100K+ users</span>
+          </div>
+        </div>
+        <div class="project-preview">
+          <div class="doc-frame-content" style="padding: 32px 36px; overflow-y: auto;">
+            <div style="font-size:11px; color:#888; margin-bottom:20px; text-transform:uppercase; letter-spacing:1px; font-weight:600;">Product Launch · Email Campaign</div>
+            <div style="border-bottom:1px solid #f0f0f0; padding-bottom:16px; margin-bottom:16px;">
+              <div style="font-size:11px; color:#888; margin-bottom:4px;">Subject line A (CTR: 3.2%)</div>
+              <div style="font-size:14px; font-weight:700; color:#1a1a1a;">Mailion is here. Your team's email, reimagined.</div>
+            </div>
+            <div style="border-bottom:1px solid #f0f0f0; padding-bottom:16px; margin-bottom:20px;">
+              <div style="font-size:11px; color:#888; margin-bottom:4px;">Subject line B (CTR: 4.8%) ✓ Winner</div>
+              <div style="font-size:14px; font-weight:700; color:#2563eb;">Finally: corporate email that doesn't feel like 2005.</div>
+            </div>
+            <p style="font-size:13px; color:#444; line-height:1.8; margin-bottom:16px;">Hi [Name],</p>
+            <p style="font-size:13px; color:#444; line-height:1.8; margin-bottom:16px;">We've been building something your team has been waiting for — a corporate email platform that's actually fast, secure, and a pleasure to use.</p>
+            <div style="background:#4f8ef7; color:#fff; text-align:center; padding:12px 24px; border-radius:8px; font-size:13px; font-weight:700; margin-bottom:16px;">Try Mailion Free for 30 Days →</div>
+            <p style="font-size:11px; color:#888; text-align:center;">No credit card required · Cancel anytime</p>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-  <div class="case-card">
-    <div class="case-meta">
-      <div class="case-metric">10+</div>
-      <div class="case-metric-label">years freelance</div>
-      <p class="case-client">Route4Me · iDeals · Highland Gold · others</p>
-      <p class="case-year">2014 – Present · International</p>
-    </div>
-    <div class="case-content">
-      <h2 class="case-title">Freelance Copywriter — International B2B & B2C Clients</h2>
-      <p class="case-desc">Provided SEO copywriting and content strategy for international clients across SaaS, logistics, fintech, and mining sectors. Created high-converting landing pages, ad copy (Google/Facebook/TikTok), newsletter sequences, and ghostwritten founder content. Built scalable content systems and brand voice documentation.</p>
-      <div class="case-results">
-        <span class="result-pill">Landing pages</span>
-        <span class="result-pill">Ad copy (Google/Meta/TikTok)</span>
-        <span class="result-pill">Newsletter sequences</span>
-        <span class="result-pill">Ghostwriting</span>
+    <!-- Freelance -->
+    <div class="project-card">
+      <div class="project-inner reverse">
+        <div class="project-preview">
+          <div class="doc-frame-content" style="padding: 32px 36px; overflow-y: auto;">
+            <div style="font-size:11px; color:#888; margin-bottom:6px; text-transform:uppercase; letter-spacing:1px; font-weight:600;">Landing Page · SaaS</div>
+            <h1 style="font-size:22px; font-weight:800; color:#1a1a1a; margin-bottom:10px; line-height:1.2; letter-spacing:-0.5px;">Optimize 500 Stops in 30 Seconds.</h1>
+            <p style="font-size:15px; color:#555; line-height:1.7; margin-bottom:20px;">Route4Me plans the most efficient routes for your drivers — automatically. Save 2+ hours per dispatcher, every day.</p>
+            <div style="display:flex; gap:10px; margin-bottom:24px;">
+              <div style="background:#2563eb; color:#fff; padding:11px 22px; border-radius:8px; font-size:13px; font-weight:700;">Start Free Trial</div>
+              <div style="border:1px solid #e5e7eb; color:#444; padding:11px 22px; border-radius:8px; font-size:13px; font-weight:600;">See Demo</div>
+            </div>
+            <div style="display:flex; gap:16px; flex-wrap:wrap;">
+              <div style="text-align:center;">
+                <div style="font-size:20px; font-weight:800; color:#1a1a1a;">35%</div>
+                <div style="font-size:11px; color:#888;">fuel savings</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:20px; font-weight:800; color:#1a1a1a;">2h+</div>
+                <div style="font-size:11px; color:#888;">saved per dispatcher</div>
+              </div>
+              <div style="text-align:center;">
+                <div style="font-size:20px; font-weight:800; color:#1a1a1a;">40K+</div>
+                <div style="font-size:11px; color:#888;">active users</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="project-info">
+          <p class="project-badge">Conversion Copywriting</p>
+          <p class="project-client">Route4Me · iDeals · Highland Gold · others</p>
+          <h2 class="project-title">Freelance Copywriting – International B2B & B2C Clients</h2>
+          <p class="project-desc">Provided SEO copywriting and content strategy for international clients across SaaS, logistics, fintech, and mining sectors. Created high-converting landing pages, ad copy (Google/Facebook/TikTok), newsletter sequences, and ghostwritten founder content. Built scalable content systems and brand voice documentation.</p>
+          <div class="project-deliverables">
+            <p class="deliverables-label">Deliverables</p>
+            <ul class="deliverables-list">
+              <li>High-converting landing pages with value propositions and CTAs</li>
+              <li>Ad copy for Google, Meta, and TikTok campaigns</li>
+              <li>Newsletter sequences and drip campaigns</li>
+              <li>Ghostwritten founder articles and LinkedIn content</li>
+              <li>Brand voice guides and content systems</li>
+            </ul>
+          </div>
+          <div class="result-row">
+            <span class="result-pill">Landing pages</span>
+            <span class="result-pill">Ad copy</span>
+            <span class="result-pill">Newsletter sequences</span>
+            <span class="result-pill">Ghostwriting</span>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
-</div>
+  </div><!-- /cat-section -->
 
+</div><!-- /content -->
 
 <footer>© 2026 Maria Strabykina. All rights reserved.</footer>
 
